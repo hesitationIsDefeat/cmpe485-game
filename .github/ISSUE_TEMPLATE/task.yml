@@ -1,0 +1,75 @@
+name: Unity Task
+description: Create a task
+title: "[Task]: "
+labels: ["task"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Unity Task
+        Use this to track game development work.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Task Description
+      description: What needs to be done?
+      placeholder: Create a new enemy script that...
+    validations:
+      required: true
+
+  - type: input
+    id: scene
+    attributes:
+      label: Target Scene / Prefab
+      description: Which file does this affect?
+      placeholder: Assets/Scenes/Level1.unity OR Player.prefab
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - 🎮 Gameplay Mechanic
+        - 🎨 Art / UI
+        - 🔊 Audio
+        - 🧱 Level Design
+        - 🐛 Bug Fix
+        - ⚙️ System / Tooling
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Target Platform (If specific)
+      options:
+        - All Platforms
+        - Windows / PC
+        - Android
+        - iOS
+        - WebGL
+        - Console (PS/Xbox/Switch)
+    validations:
+      required: false
+
+  - type: textarea
+    id: assets
+    attributes:
+      label: Required Assets / Dependencies
+      description: Are there specific sprites, sounds, or plugins needed for this?
+      placeholder: |
+        - Needs the "Dungeon_Sprite_Sheet.png"
+        - Requires the "A* Pathfinding" package
+      render: markdown
+
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of Done
+      description: Checklist for completion
+      value: |
+        - [ ] Logic implemented in C#
+        - [ ] Prefab created/updated
+        - [ ] Tested in Play Mode
+        - [ ] Works in Build (if applicable)
