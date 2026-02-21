@@ -11,7 +11,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip audioClip;
 
     void Awake() {
-        if (INSTANCE = null) {
+        if (INSTANCE == null) {
             INSTANCE = this;
         } else {
             Destroy(gameObject);
@@ -21,6 +21,11 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        if (audioSource.clip == null) {
+            audioSource.clip = audioClip;
+        }
+        audioSource.time = 16.5f;
+        audioSource.Play();
     }
 
     // Update is called once per frame
@@ -33,12 +38,13 @@ public class SoundManager : MonoBehaviour
 
     void ToggleAudio() {
         if (audioSource.isPlaying) {
-            audioSource.Stop();
+            audioSource.Pause();
         } else {
-            if (audioSource.clip == null) {
-                audioSource.clip = audioClip;
+            if (audioSource.time == 0) {
+                audioSource.Play();
+            } else {
+                audioSource.UnPause();
             }
-            audioSource.Play();
         }
     }
 }
