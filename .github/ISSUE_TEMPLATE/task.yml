@@ -36,7 +36,7 @@ body:
         - 🧱 Level Design
         - 🐛 Bug Fix
         - ⚙️ System / Tooling
-	- 🏫 Homework
+        - 🏫 Homework
     validations:
       required: true
 
