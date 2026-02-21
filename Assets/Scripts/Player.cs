@@ -7,28 +7,38 @@ public class Player : MonoBehaviour
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
 
-    private CharacterController characterController;
+    [Header("Movement Settings")]
+    public float moveSpeed = 40f;
+    public float dragValue = 2f;
 
-    public float moveSpeed = 5f;
+    private Rigidbody rigidBody;
+    private Vector2 inputVector;
 
     // Start is called before the first frame update
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        rigidBody = GetComponent<Rigidbody>();
+
+        rigidBody.freezeRotation = true;
+
+        rigidBody.drag = dragValue;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
+        float x = Input.GetAxisRaw(HORIZONTAL);
+        float z = Input.GetAxisRaw(VERTICAL);
+        inputVector = new Vector2(x, z).normalized;
     }
 
-    void Move() {
-        float moveX = Input.GetAxis(HORIZONTAL);
-        float moveZ = Input.GetAxis(VERTICAL);
+    void FixedUpdate() {
+        HandleMovement();
+    }
 
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
+    void HandleMovement() {
+        Vector3 moveDirection = transform.right * inputVector.x + transform.forward * inputVector.y;
 
-        characterController.Move(move * moveSpeed * Time.deltaTime);
+        rigidBody.AddForce(moveDirection * moveSpeed, ForceMode.Acceleration);
     }
 }
