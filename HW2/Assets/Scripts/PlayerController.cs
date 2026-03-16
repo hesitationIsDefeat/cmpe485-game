@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private const string VERTICAL = "Vertical";
 
     public float moveSpeed = 5f;
+    public float rotationSpeed = 10f;
     
     private Rigidbody rb;
     private Vector3 movement;
@@ -28,5 +29,12 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate() {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+
+        if (movement != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(movement);
+            
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime));
+        }
     }
 }
