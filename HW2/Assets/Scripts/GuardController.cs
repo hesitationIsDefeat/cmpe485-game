@@ -24,22 +24,41 @@ public class GuardController : MonoBehaviour
         {
             yield return StartCoroutine(MoveToTarget(location1.position));
             
-            yield return new WaitForSeconds(waitTime);
+            yield return StartCoroutine(TurnToFace(location0.position, waitTime));
 
             yield return StartCoroutine(MoveToTarget(location0.position));
 
-            yield return new WaitForSeconds(waitTime);
+            yield return StartCoroutine(TurnToFace(location1.position, waitTime));
         }
+    }
+
+    IEnumerator TurnToFace(Vector3 target, float duration)
+    {
+        Vector3 directionToTarget = target - transform.position;
+        directionToTarget.y = 0f; 
+
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+
+        float timeElapsed = 0f;
+
+        while (timeElapsed < duration)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, timeElapsed / duration);
+            
+            timeElapsed += Time.deltaTime;
+            
+            yield return null; 
+        }
+
+        transform.rotation = targetRotation;
     }
 
     IEnumerator MoveToTarget(Vector3 target)
     {
-        transform.LookAt(new Vector3(target.x, transform.position.y, target.z));
-
         while (Vector3.Distance(transform.position, target) > 0.1f)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-            
             yield return null; 
         }
     }
