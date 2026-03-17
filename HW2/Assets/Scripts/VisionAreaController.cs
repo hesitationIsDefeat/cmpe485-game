@@ -5,7 +5,17 @@ using UnityEngine;
 public class VisionAreaController : MonoBehaviour
 {
     public const string PLAYER = "Player";
-    public GameManager gameManager;
+    private GameManager gameManager;
+
+    void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+
+        if (gameManager == null)
+        {
+            Debug.LogError("VisionArea cannot find the GameManager in the scene!");
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
