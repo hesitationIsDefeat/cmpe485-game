@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Exiting Labyrinth...");
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #else
