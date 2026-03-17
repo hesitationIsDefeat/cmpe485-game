@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 223264467}
   - component: {fileID: 223264466}
   - component: {fileID: 223264465}
+  - component: {fileID: 223264468}
   m_Layer: 0
   m_Name: VisionArea
   m_TagString: Untagged
@@ -227,6 +228,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223264463}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &223264468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223264463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a6802c7952d4a35ac374f2c2313d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 1026345323}
 --- !u!1 &291919916
 GameObject:
   m_ObjectHideFlags: 0
