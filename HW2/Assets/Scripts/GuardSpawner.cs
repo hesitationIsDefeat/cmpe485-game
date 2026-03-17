@@ -24,15 +24,15 @@ public class GuardSpawner : MonoBehaviour
 
         GameObject newGuard = Instantiate(guardPrefab, location0.position, startingRotation);
 
-        // GuardController controller = newGuard.GetComponent<GuardController>();
+        GuardController controller = newGuard.GetComponent<GuardController>();
 
-        // if (controller != null)
-        // {
-        //     controller.Initialize(location0, location1);
-        // }
-        // else
-        // {
-        //     Debug.LogError("The spawned guard is missing a GuardController script!");
-        // }
+        if (controller != null)
+        {
+            controller.Initialize(location0, location1);
+        }
+        else
+        {
+            Debug.LogError("The spawned guard is missing a GuardController script!");
+        }
     }
 }
