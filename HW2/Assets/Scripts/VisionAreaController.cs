@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VisionAreaController : MonoBehaviour
 {
-    public const string PLAYER = "Player";
+    private const string PLAYER = "Player";
     private GameManager gameManager;
 
     void Start()
