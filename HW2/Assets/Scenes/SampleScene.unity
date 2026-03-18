@@ -2535,6 +2535,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1961116538}
     m_Modifications:
+    - target: {fileID: -8784892184428194901, guid: d7dc7ab07db4345b8bc407dde2bfe534, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f10caacb9530242caa90b8bc261b8c55, type: 2}
     - target: {fileID: -8679921383154817045, guid: d7dc7ab07db4345b8bc407dde2bfe534, type: 3}
       propertyPath: m_LocalScale.x
       value: 54.038002
@@ -2587,10 +2591,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7948617022820844507, guid: d7dc7ab07db4345b8bc407dde2bfe534, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e65322ab48d334e0f8a0b81b25fe5ff7, type: 2}
+    - target: {fileID: -6050290894734054340, guid: d7dc7ab07db4345b8bc407dde2bfe534, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f10caacb9530242caa90b8bc261b8c55, type: 2}
+    - target: {fileID: -4627948388342483919, guid: d7dc7ab07db4345b8bc407dde2bfe534, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 468d0e0e733b249c6b078171b468e75b, type: 2}
+    - target: {fileID: -3884817601140079010, guid: d7dc7ab07db4345b8bc407dde2bfe534, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d21d0312c580540689e66d452cfd4bb3, type: 2}
     - target: {fileID: 919132149155446097, guid: d7dc7ab07db4345b8bc407dde2bfe534, type: 3}
       propertyPath: m_Name
       value: LegoMan
       objectReference: {fileID: 0}
+    - target: {fileID: 4345279635860492408, guid: d7dc7ab07db4345b8bc407dde2bfe534, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e65322ab48d334e0f8a0b81b25fe5ff7, type: 2}
+    - target: {fileID: 4815818983354634885, guid: d7dc7ab07db4345b8bc407dde2bfe534, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f10caacb9530242caa90b8bc261b8c55, type: 2}
+    - target: {fileID: 8954212963044646836, guid: d7dc7ab07db4345b8bc407dde2bfe534, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d21d0312c580540689e66d452cfd4bb3, type: 2}
+    - target: {fileID: 9130662098181580323, guid: d7dc7ab07db4345b8bc407dde2bfe534, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d21d0312c580540689e66d452cfd4bb3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6017,7 +6053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  turnCooldown: 0.4
+  turnDuration: 0.2
 --- !u!65 &1961116540
 BoxCollider:
   m_ObjectHideFlags: 0
