@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,53 +5,57 @@ public class CameraObstacleFader : MonoBehaviour
 {
     public Transform target; 
     public float fadeAlpha = 0.3f; 
-
-    private Renderer currentlyFadedRenderer;
-    private Color originalColor;
     private const string WALL = "Wall";
+
+    private Dictionary<Renderer, Color> fadedWalls = new Dictionary<Renderer, Color>();
+    
+    private List<Renderer> hitsThisFrame = new List<Renderer>();
 
     void Update()
     {
         Vector3 direction = target.position - transform.position;
         float distance = Vector3.Distance(transform.position, target.position);
         
-        RaycastHit hit;
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, distance);
 
-        if (Physics.Raycast(transform.position, direction, out hit, distance))
+        hitsThisFrame.Clear();
+
+        foreach (RaycastHit hit in hits)
         {
             if (hit.collider.CompareTag(WALL))
             {
                 Renderer hitRenderer = hit.collider.GetComponent<Renderer>();
 
-                if (currentlyFadedRenderer != hitRenderer)
+                if (hitRenderer != null)
                 {
-                    ResetFadedWall(); 
+                    hitsThisFrame.Add(hitRenderer);
 
-                    currentlyFadedRenderer = hitRenderer;
-                    originalColor = currentlyFadedRenderer.material.color;
+                    if (!fadedWalls.ContainsKey(hitRenderer))
+                    {
+                        Color originalColor = hitRenderer.material.color;
+                        fadedWalls.Add(hitRenderer, originalColor);
 
-                    Color fadeColor = originalColor;
-                    fadeColor.a = fadeAlpha;
-                    currentlyFadedRenderer.material.color = fadeColor;
+                        Color fadeColor = originalColor;
+                        fadeColor.a = fadeAlpha;
+                        hitRenderer.material.color = fadeColor;
+                    }
                 }
             }
-            else
+        }
+
+        List<Renderer> wallsToRestore = new List<Renderer>();
+        foreach (Renderer previouslyFadedWall in fadedWalls.Keys)
+        {
+            if (!hitsThisFrame.Contains(previouslyFadedWall))
             {
-                ResetFadedWall();
+                wallsToRestore.Add(previouslyFadedWall);
             }
         }
-        else
-        {
-            ResetFadedWall();
-        }
-    }
 
-    private void ResetFadedWall()
-    {
-        if (currentlyFadedRenderer != null)
+        foreach (Renderer wallToRestore in wallsToRestore)
         {
-            currentlyFadedRenderer.material.color = originalColor;
-            currentlyFadedRenderer = null;
+            wallToRestore.material.color = fadedWalls[wallToRestore];
+            fadedWalls.Remove(wallToRestore);
         }
     }
 }
