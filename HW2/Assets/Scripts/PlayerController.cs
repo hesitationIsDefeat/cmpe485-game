@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
                 
                 // Instantly snap the Rigidbody's rotation
                 Quaternion turnRotation = Quaternion.Euler(0f, angle, 0f);
-                rb.rotation = rb.rotation * turnRotation;
+                rb.MoveRotation(rb.rotation * turnRotation);
 
                 // Reset the timer to lock out turning for the next 1 second
                 turnTimer = turnCooldown;
