@@ -154,8 +154,8 @@ Transform:
   - {fileID: 1148888449}
   - {fileID: 1019392066}
   - {fileID: 1811930096}
-  - {fileID: 1615638284}
   - {fileID: 1762882869}
+  - {fileID: 1615638284}
   - {fileID: 2132999648}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4367,8 +4367,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guardPrefab: {fileID: 7067077540445274134, guid: 74d58d583b00b47bab5576dc3cd88751, type: 3}
-  location0: {fileID: 1148888449}
-  location1: {fileID: 1019392066}
+  patrolRoutes:
+  - startPoint: {fileID: 1148888449}
+    endPoint: {fileID: 1019392066}
+  - startPoint: {fileID: 1811930096}
+    endPoint: {fileID: 1762882869}
+  - startPoint: {fileID: 1615638284}
+    endPoint: {fileID: 2132999648}
 --- !u!4 &1517221755
 Transform:
   m_ObjectHideFlags: 0

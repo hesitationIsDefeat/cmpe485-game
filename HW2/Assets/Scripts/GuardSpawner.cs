@@ -2,33 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct PatrolRoute
+{
+    public Transform startPoint;
+    public Transform endPoint;
+}
+
 public class GuardSpawner : MonoBehaviour
 {
 [Header("Guard Settings")]
     public GameObject guardPrefab;
     
     [Header("Route Locations")]
-    public Transform location0;
-    public Transform location1;   
+    public List<PatrolRoute> patrolRoutes = new List<PatrolRoute>();  
 
     void Start()
     {
-        SpawnGuard();
+        foreach (PatrolRoute route in patrolRoutes)
+        {
+            SpawnGuard(route);
+        }
     }
 
-    public void SpawnGuard()
+    public void SpawnGuard(PatrolRoute route)
     {
-        Vector3 lookDirection = location1.position - location0.position;
+        if (route.startPoint == null || route.endPoint == null)
+        {
+            Debug.LogWarning("A patrol route is missing a start or end point. Skipping this guard.");
+            return;
+        }
+
+        Vector3 lookDirection = route.endPoint.position - route.startPoint.position;
+        
+        if (lookDirection == Vector3.zero) 
+        {
+            lookDirection = Vector3.forward;
+        }
+
         lookDirection.y = 0f; 
         Quaternion startingRotation = Quaternion.LookRotation(lookDirection);
 
-        GameObject newGuard = Instantiate(guardPrefab, location0.position, startingRotation);
+        GameObject newGuard = Instantiate(guardPrefab, route.startPoint.position, startingRotation);
 
         GuardController controller = newGuard.GetComponent<GuardController>();
 
         if (controller != null)
         {
-            controller.Initialize(location0, location1);
+            controller.Initialize(route.startPoint, route.endPoint);
         }
         else
         {
