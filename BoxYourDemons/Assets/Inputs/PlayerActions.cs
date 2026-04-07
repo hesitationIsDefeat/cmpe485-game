@@ -109,6 +109,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RHook"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e77be1a-b59d-4b9a-a9eb-5fe8a90218ef"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -155,6 +164,28 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""LHook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2a36868-e395-420d-85af-bde212dd1cad"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RHook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7c35854-07d1-4281-970a-60bab5af11bc"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RHook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -165,6 +196,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Attack = asset.FindActionMap("Attack", throwIfNotFound: true);
         m_Attack_Jab = m_Attack.FindAction("Jab", throwIfNotFound: true);
         m_Attack_LHook = m_Attack.FindAction("LHook", throwIfNotFound: true);
+        m_Attack_RHook = m_Attack.FindAction("RHook", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -247,6 +279,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private List<IAttackActions> m_AttackActionsCallbackInterfaces = new List<IAttackActions>();
     private readonly InputAction m_Attack_Jab;
     private readonly InputAction m_Attack_LHook;
+    private readonly InputAction m_Attack_RHook;
     /// <summary>
     /// Provides access to input actions defined in input action map "Attack".
     /// </summary>
@@ -266,6 +299,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Attack/LHook".
         /// </summary>
         public InputAction @LHook => m_Wrapper.m_Attack_LHook;
+        /// <summary>
+        /// Provides access to the underlying input action "Attack/RHook".
+        /// </summary>
+        public InputAction @RHook => m_Wrapper.m_Attack_RHook;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -298,6 +335,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @LHook.started += instance.OnLHook;
             @LHook.performed += instance.OnLHook;
             @LHook.canceled += instance.OnLHook;
+            @RHook.started += instance.OnRHook;
+            @RHook.performed += instance.OnRHook;
+            @RHook.canceled += instance.OnRHook;
         }
 
         /// <summary>
@@ -315,6 +355,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @LHook.started -= instance.OnLHook;
             @LHook.performed -= instance.OnLHook;
             @LHook.canceled -= instance.OnLHook;
+            @RHook.started -= instance.OnRHook;
+            @RHook.performed -= instance.OnRHook;
+            @RHook.canceled -= instance.OnRHook;
         }
 
         /// <summary>
@@ -369,5 +412,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLHook(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RHook" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRHook(InputAction.CallbackContext context);
     }
 }

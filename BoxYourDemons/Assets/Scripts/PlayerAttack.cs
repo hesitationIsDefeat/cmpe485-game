@@ -26,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
 
         actions.Attack.Jab.performed += context => ThrowJab();
         actions.Attack.LHook.performed += context => ThrowLeftHook();
+        actions.Attack.RHook.performed += context => ThrowRightHook();
     }
 
     private void OnEnable()
@@ -46,5 +47,10 @@ public class PlayerAttack : MonoBehaviour
     private void ThrowLeftHook()
     {
         animator.SetTrigger("LHook");
+    }
+
+    private void ThrowRightHook()
+    {
+        animator.SetTrigger("RHook");
     }
 }
