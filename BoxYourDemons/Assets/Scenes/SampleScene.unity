@@ -392,6 +392,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoxerForUnity
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: de30d4b1f27a34b9cbbf022edbcf6d89, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5bc1d7cf081ca4745928c9b4181f09a4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
