@@ -41,16 +41,16 @@ public class PlayerAttack : MonoBehaviour
 
     private void ThrowJab()
     {
-        animator.SetTrigger("Jab");
+        animator.SetTrigger(Constants.AnimTriggerJab);
     }
 
     private void ThrowLeftHook()
     {
-        animator.SetTrigger("LHook");
+        animator.SetTrigger(Constants.AnimTriggerLHook);
     }
 
     private void ThrowRightHook()
     {
-        animator.SetTrigger("RHook");
+        animator.SetTrigger(Constants.AnimTriggerRHook);
     }
 }
