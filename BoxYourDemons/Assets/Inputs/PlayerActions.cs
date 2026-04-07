@@ -188,6 +188,98 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Evade"",
+            ""id"": ""3cb142a3-7212-45ef-9dc3-494867312cea"",
+            ""actions"": [
+                {
+                    ""name"": ""LPivot"",
+                    ""type"": ""Button"",
+                    ""id"": ""fedd41b0-0105-4c2c-b880-03d000a73483"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RPivot"",
+                    ""type"": ""Button"",
+                    ""id"": ""5acf7684-b166-4e46-9a21-d22068c2fca4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""c92f30a6-bc60-4bf4-9c53-7042f4dcb013"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LPivot"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""06b10d24-5522-46cc-a2b1-526da85151fc"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LPivot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""b7664ec4-aca9-482e-8302-66dd6c21a561"",
+                    ""path"": ""<Keyboard>/#(A)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LPivot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""40da7e5b-aebd-42e5-99a9-d11a72316b7a"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RPivot"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""27df38fd-298f-443f-b74e-f1f2d1e5d4f9"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RPivot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""6a535357-df9f-4089-a6c3-1b04c763ce1d"",
+                    ""path"": ""<Keyboard>/#(D)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RPivot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -197,11 +289,16 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Attack_Jab = m_Attack.FindAction("Jab", throwIfNotFound: true);
         m_Attack_LHook = m_Attack.FindAction("LHook", throwIfNotFound: true);
         m_Attack_RHook = m_Attack.FindAction("RHook", throwIfNotFound: true);
+        // Evade
+        m_Evade = asset.FindActionMap("Evade", throwIfNotFound: true);
+        m_Evade_LPivot = m_Evade.FindAction("LPivot", throwIfNotFound: true);
+        m_Evade_RPivot = m_Evade.FindAction("RPivot", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
     {
         UnityEngine.Debug.Assert(!m_Attack.enabled, "This will cause a leak and performance issues, PlayerActions.Attack.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Evade.enabled, "This will cause a leak and performance issues, PlayerActions.Evade.Disable() has not been called.");
     }
 
     /// <summary>
@@ -391,6 +488,113 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="AttackActions" /> instance referencing this action map.
     /// </summary>
     public AttackActions @Attack => new AttackActions(this);
+
+    // Evade
+    private readonly InputActionMap m_Evade;
+    private List<IEvadeActions> m_EvadeActionsCallbackInterfaces = new List<IEvadeActions>();
+    private readonly InputAction m_Evade_LPivot;
+    private readonly InputAction m_Evade_RPivot;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Evade".
+    /// </summary>
+    public struct EvadeActions
+    {
+        private @PlayerActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public EvadeActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Evade/LPivot".
+        /// </summary>
+        public InputAction @LPivot => m_Wrapper.m_Evade_LPivot;
+        /// <summary>
+        /// Provides access to the underlying input action "Evade/RPivot".
+        /// </summary>
+        public InputAction @RPivot => m_Wrapper.m_Evade_RPivot;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Evade; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="EvadeActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(EvadeActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="EvadeActions" />
+        public void AddCallbacks(IEvadeActions instance)
+        {
+            if (instance == null || m_Wrapper.m_EvadeActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_EvadeActionsCallbackInterfaces.Add(instance);
+            @LPivot.started += instance.OnLPivot;
+            @LPivot.performed += instance.OnLPivot;
+            @LPivot.canceled += instance.OnLPivot;
+            @RPivot.started += instance.OnRPivot;
+            @RPivot.performed += instance.OnRPivot;
+            @RPivot.canceled += instance.OnRPivot;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="EvadeActions" />
+        private void UnregisterCallbacks(IEvadeActions instance)
+        {
+            @LPivot.started -= instance.OnLPivot;
+            @LPivot.performed -= instance.OnLPivot;
+            @LPivot.canceled -= instance.OnLPivot;
+            @RPivot.started -= instance.OnRPivot;
+            @RPivot.performed -= instance.OnRPivot;
+            @RPivot.canceled -= instance.OnRPivot;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="EvadeActions.UnregisterCallbacks(IEvadeActions)" />.
+        /// </summary>
+        /// <seealso cref="EvadeActions.UnregisterCallbacks(IEvadeActions)" />
+        public void RemoveCallbacks(IEvadeActions instance)
+        {
+            if (m_Wrapper.m_EvadeActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="EvadeActions.AddCallbacks(IEvadeActions)" />
+        /// <seealso cref="EvadeActions.RemoveCallbacks(IEvadeActions)" />
+        /// <seealso cref="EvadeActions.UnregisterCallbacks(IEvadeActions)" />
+        public void SetCallbacks(IEvadeActions instance)
+        {
+            foreach (var item in m_Wrapper.m_EvadeActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_EvadeActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="EvadeActions" /> instance referencing this action map.
+    /// </summary>
+    public EvadeActions @Evade => new EvadeActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Attack" which allows adding and removing callbacks.
     /// </summary>
@@ -419,5 +623,27 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRHook(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Evade" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="EvadeActions.AddCallbacks(IEvadeActions)" />
+    /// <seealso cref="EvadeActions.RemoveCallbacks(IEvadeActions)" />
+    public interface IEvadeActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "LPivot" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLPivot(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RPivot" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRPivot(InputAction.CallbackContext context);
     }
 }
