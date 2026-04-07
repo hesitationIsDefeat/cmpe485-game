@@ -20,14 +20,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void Awake()
     {
-        // Get the Animator component attached to the boxer
         animator = GetComponent<Animator>();
         
-        // Initialize our actions
         actions = new PlayerActions();
 
-        // When the 'Jab' action is performed (button pressed), run the ThrowJab function
         actions.Attack.Jab.performed += context => ThrowJab();
+        actions.Attack.LHook.performed += context => ThrowLeftHook();
     }
 
     private void OnEnable()
@@ -42,7 +40,11 @@ public class PlayerAttack : MonoBehaviour
 
     private void ThrowJab()
     {
-        // Trigger the 'Punch' parameter we created in the Animator
         animator.SetTrigger("Jab");
+    }
+
+    private void ThrowLeftHook()
+    {
+        animator.SetTrigger("LHook");
     }
 }

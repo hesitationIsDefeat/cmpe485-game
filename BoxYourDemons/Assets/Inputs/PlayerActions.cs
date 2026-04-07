@@ -100,6 +100,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LHook"",
+                    ""type"": ""Button"",
+                    ""id"": ""64b3b921-a51c-405b-8077-50ce68f7b513"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -124,6 +133,28 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""Jab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bfdeca62-2432-41ba-8223-1a22bfa6c646"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LHook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9a68355-b6b1-4700-bbe3-711a51f69c4d"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LHook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -133,6 +164,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         // Attack
         m_Attack = asset.FindActionMap("Attack", throwIfNotFound: true);
         m_Attack_Jab = m_Attack.FindAction("Jab", throwIfNotFound: true);
+        m_Attack_LHook = m_Attack.FindAction("LHook", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -214,6 +246,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Attack;
     private List<IAttackActions> m_AttackActionsCallbackInterfaces = new List<IAttackActions>();
     private readonly InputAction m_Attack_Jab;
+    private readonly InputAction m_Attack_LHook;
     /// <summary>
     /// Provides access to input actions defined in input action map "Attack".
     /// </summary>
@@ -229,6 +262,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Attack/Jab".
         /// </summary>
         public InputAction @Jab => m_Wrapper.m_Attack_Jab;
+        /// <summary>
+        /// Provides access to the underlying input action "Attack/LHook".
+        /// </summary>
+        public InputAction @LHook => m_Wrapper.m_Attack_LHook;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -258,6 +295,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Jab.started += instance.OnJab;
             @Jab.performed += instance.OnJab;
             @Jab.canceled += instance.OnJab;
+            @LHook.started += instance.OnLHook;
+            @LHook.performed += instance.OnLHook;
+            @LHook.canceled += instance.OnLHook;
         }
 
         /// <summary>
@@ -272,6 +312,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Jab.started -= instance.OnJab;
             @Jab.performed -= instance.OnJab;
             @Jab.canceled -= instance.OnJab;
+            @LHook.started -= instance.OnLHook;
+            @LHook.performed -= instance.OnLHook;
+            @LHook.canceled -= instance.OnLHook;
         }
 
         /// <summary>
@@ -319,5 +362,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJab(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LHook" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLHook(InputAction.CallbackContext context);
     }
 }
