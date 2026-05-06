@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine; 
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform cameraTransform;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private Transform currentTarget;
     private bool isLockedOn;
+    public bool IsLockedOn => isLockedOn;
 
     private void Start()
     {
@@ -59,9 +60,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (inputs.Combat.ModifierKey.IsPressed() && isLockedOn) return;
+
         if (!isLockedOn && moveInput.sqrMagnitude > 0.01f)
         {
-            if (isLockedOn && currentTarget != null)
+            if (currentTarget != null)
             {
                 // Locked-on: Move relative to the character's facing direction (Strafing)
                 Vector3 strafeDirection = (transform.right * moveInput.x) + (transform.forward * moveInput.y);
