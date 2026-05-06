@@ -7,10 +7,10 @@ public class PlayerCombat : MonoBehaviour
     private Animator animator;
     private PlayerInputs inputs;
 
-    private void Awake()
+    private void Start()
     {
         animator = GetComponent<Animator>();
-        inputs = new PlayerInputs();
+        inputs = GetComponent<PlayerInputHandler>().Inputs;
 
         // Punches
         inputs.Combat.Jab.performed += context => HandleLeftClick();
@@ -19,8 +19,8 @@ public class PlayerCombat : MonoBehaviour
         inputs.Combat.RightHook.performed += context => animator.SetTrigger(Constants.Animations.TriggerRightHook);
     }
 
-    private void OnEnable() => inputs.Enable();
-    private void OnDisable() => inputs.Disable();
+    // private void OnEnable() => inputs.Enable();
+    // private void OnDisable() => inputs.Disable();
 
     private void HandleMoveLeft()
     {
