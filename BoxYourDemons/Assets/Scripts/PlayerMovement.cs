@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CinemachineTargetGroup targetGroup;
 
     [Header("Movement")]
-    // moveSpeed is gone because Root Motion controls the speed natively
+    [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotationSpeed = 10f;
 
     [Header("Lock-On")]
@@ -50,6 +50,32 @@ public class PlayerController : MonoBehaviour
         ReadInput();
         HandleRotation(); // Movement is handled by Root Motion, so we only handle Rotation now!
         UpdateAnimator();
+    }
+
+    private void FixedUpdate()
+    {
+        HandleMovement();
+    }
+
+    private void HandleMovement()
+    {
+        if (!isLockedOn && moveInput.sqrMagnitude > 0.01f)
+        {
+            if (isLockedOn && currentTarget != null)
+            {
+                // Locked-on: Move relative to the character's facing direction (Strafing)
+                Vector3 strafeDirection = (transform.right * moveInput.x) + (transform.forward * moveInput.y);
+                Vector3 newPosition = rb.position + (strafeDirection.normalized * moveSpeed * Time.fixedDeltaTime);
+                rb.MovePosition(newPosition);
+            }
+            else
+            {
+                // Free Roam: Move relative to the camera
+                Vector3 moveDirection = GetCameraRelativeDirection();
+                Vector3 newPosition = rb.position + (moveDirection.normalized * moveSpeed * Time.fixedDeltaTime);
+                rb.MovePosition(newPosition);
+            }
+        }
     }
 
     // ------------------------
@@ -131,8 +157,9 @@ public class PlayerController : MonoBehaviour
     // ------------------------
     private void OnLockOn(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started) return;
-        
+        Debug.Log("OnLockOn: " + isLockedOn);
+        // if (!ctx.started) return;
+        Debug.Log("here");
         if (isLockedOn)
         {
             ClearTarget();
@@ -155,7 +182,11 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("No enemies in range.");
             return;
-        } 
+        } else 
+        {
+            // PUTTING THIS BACK!
+            Debug.Log("Found an enemy!"); 
+        }
 
         float closestDistance = Mathf.Infinity;
         Transform bestTarget = null;
