@@ -5,6 +5,24 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [Header("Hitboxes")]
+    [SerializeField] private Hitbox leftGlove;
+    [SerializeField] private Hitbox rightGlove;
+
+    // We will call these exactly when the fist extends
+    public void EnableLeftGlove() => leftGlove.EnableHitbox();
+    public void EnableRightGlove() => rightGlove.EnableHitbox();
+
+    // We will call these exactly when the fist pulls back
+    public void DisableLeftGlove() => leftGlove.DisableHitbox();
+    public void DisableRightGlove() => rightGlove.DisableHitbox();
+    
+    // Safety net: Turn both off at the exact same time
+    public void DisableAllHitboxes()
+    {
+        leftGlove.DisableHitbox();
+        rightGlove.DisableHitbox();
+    }
     private Animator animator;
     private PlayerInputs inputs;
     private PlayerMovement playerMovement;

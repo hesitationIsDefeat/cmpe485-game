@@ -150,7 +150,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 318121782612854265, guid: 35225906af19e44d598891337e5b333a, type: 3}
+  m_Motion: {fileID: 7400000, guid: 4ec608fe88674172aaa1a513294b4965, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -296,7 +296,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 4875644334337891789, guid: 35225906af19e44d598891337e5b333a, type: 3}
+  m_Motion: {fileID: 7400000, guid: 18064cca62f8f33a5a79b117c079c5e9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -450,7 +450,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7845812520767288709, guid: 35225906af19e44d598891337e5b333a, type: 3}
+  m_Motion: {fileID: 7400000, guid: cadf60d4292a022bf8dd674c59deaff3, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -870,7 +870,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player|Lead Jab
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5990572790729489806}
@@ -883,7 +883,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7592843791102858852, guid: 35225906af19e44d598891337e5b333a, type: 3}
+  m_Motion: {fileID: 7400000, guid: b1040613c384f535a902b9aab4930ee1, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
