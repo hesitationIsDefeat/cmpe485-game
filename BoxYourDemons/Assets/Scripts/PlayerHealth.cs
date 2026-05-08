@@ -9,6 +9,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private int currentHealth;
 
     private Animator animator;
+    
+    public bool IsBlocking { get; set; } = false;
 
     private void Awake()
     {
@@ -16,12 +18,18 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        Debug.Log($"<color=red>PLAYER TOOK DAMAGE!</color> Health: {currentHealth}");
+        if (IsBlocking)
+        {
+            Debug.Log($"{gameObject.name} BLOCKED the attack!");
 
-        // Fire the reaction animation
+            return false;
+        }
+
+        currentHealth -= damage;
+        Debug.Log($"<color=red>HIT!</color> {gameObject.name} Health: {currentHealth}");
+
         if (animator != null)
         {
             animator.SetTrigger("Hit");
@@ -29,8 +37,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         if (currentHealth <= 0)
         {
-            Debug.Log("Player Knocked Out!");
-            // animator.SetTrigger("Knockout");
+            Debug.Log($"{gameObject.name} Knocked Out!");
         }
+
+        return true;
     }
 }

@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68211633b95dd45bebe13bcf544c8fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayer:
+  targetLayer:
     serializedVersion: 2
     m_Bits: 8
   damageAmount: 10
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68211633b95dd45bebe13bcf544c8fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayer:
+  targetLayer:
     serializedVersion: 2
     m_Bits: 64
   damageAmount: 10
@@ -1236,7 +1236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68211633b95dd45bebe13bcf544c8fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayer:
+  targetLayer:
     serializedVersion: 2
     m_Bits: 8
   damageAmount: 10
@@ -2546,7 +2546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68211633b95dd45bebe13bcf544c8fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayer:
+  targetLayer:
     serializedVersion: 2
     m_Bits: 64
   damageAmount: 10

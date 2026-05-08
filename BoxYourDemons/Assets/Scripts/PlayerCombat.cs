@@ -66,39 +66,6 @@ public class PlayerCombat : MonoBehaviour
     	animator.SetTrigger(Constants.Animations.TriggerRightHook);
     }
 
-    // private void OnEnable() => inputs.Enable();
-    // private void OnDisable() => inputs.Disable();
-
-    // private void HandleMoveLeft()
-    // {
-    //     bool isDefending = inputs.Combat.ModifierKey.IsPressed(); 
-
-    //     if (isDefending)
-    //     {
-    //         animator.SetTrigger(Constants.Animations.TriggerLeftPivot);
-    //     }
-    //     else
-    //     {
-    //         //animator.SetTrigger("StepLeft"); 
-    //     }
-    // }
-
-    // private void HandleMoveRight()
-    // {
-    //     bool isDefending = inputs.Combat.ModifierKey.IsPressed();
-    //     Debug.Log(isDefending); 
-
-    //     if (isDefending)
-    //     {
-    //         Debug.Log("Right pivot");
-    //         animator.SetTrigger(Constants.Animations.TriggerRightPivot);
-    //     }
-    //     else
-    //     {
-    //         //animator.SetTrigger("StepLeft"); 
-    //     }
-    // }
-
     private void OnMovementInput(InputAction.CallbackContext ctx)
     {
     	if (IsStunned) return;

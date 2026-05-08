@@ -5,16 +5,19 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {
     [Header("Hitbox Settings")]
-    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask targetLayer;
     [SerializeField] private int damageAmount = 10;
     
     private Collider hitboxCollider;
+    
+    private Animator ownerAnimator;
 
     private void Awake()
     {
         hitboxCollider = GetComponent<Collider>();
-        // Make absolutely sure it starts turned off!
         hitboxCollider.enabled = false; 
+        
+        ownerAnimator = GetComponentInParent<Animator>();
     }
 
     public void EnableHitbox()
@@ -29,18 +32,25 @@ public class Hitbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((enemyLayer.value & (1 << other.gameObject.layer)) > 0)
+        if ((targetLayer.value & (1 << other.gameObject.layer)) > 0)
         {
-            Debug.Log($"BAM! {gameObject.name} hit {other.name} for {damageAmount} damage!");
+            IDamageable damageableTarget = other.GetComponentInParent<IDamageable>();
             
-            IDamageable healthScript = other.GetComponentInParent<IDamageable>();
-            
-            if (healthScript != null)
+            if (damageableTarget != null)
             {
-                healthScript.TakeDamage(damageAmount);
+                bool hitConnected = damageableTarget.TakeDamage(damageAmount);
+
+                if (!hitConnected)
+                {
+                    Debug.Log("My punch bounced off their guard!");
+                    if (ownerAnimator != null)
+                    {
+                        ownerAnimator.SetTrigger("Recoil");
+                    }
+                }
             }
 
-            DisableHitbox(); 
+            DisableHitbox();
         }
     }
 }

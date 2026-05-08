@@ -9,6 +9,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private int currentHealth;
 
     private Animator animator;
+    
+    public bool IsBlocking { get; set; } = false;
 
     private void Awake()
     {
@@ -17,12 +19,18 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     }
 
     // This is the exact function your Hitbox script is trying to call
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        Debug.Log($"Enemy took {damage} damage! Current Health: {currentHealth}");
+        if (IsBlocking)
+        {
+            Debug.Log($"{gameObject.name} BLOCKED the attack!");
 
-        // Fire the reaction animation
+            return false;
+        }
+
+        currentHealth -= damage;
+        Debug.Log($"<color=red>HIT!</color> {gameObject.name} Health: {currentHealth}");
+
         if (animator != null)
         {
             animator.SetTrigger("Hit");
@@ -30,14 +38,15 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
         if (currentHealth <= 0)
         {
-            Die();
+            Debug.Log($"{gameObject.name} Knocked Out!");
         }
+
+        return true;
     }
 
     private void Die()
     {
         Debug.Log("Enemy Knocked Out!");
-        // You can add a death animation trigger here later!
         // animator.SetTrigger("Knockout");
     }
 }
