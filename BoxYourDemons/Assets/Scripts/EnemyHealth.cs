@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
     [Header("Health Settings")]
     [SerializeField] private int maxHealth = 100;
     private int currentHealth;
+    
+    [Header("UI")]
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private GameObject uiCanvasObject;
 
     private Animator animator;
     
@@ -16,6 +21,22 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+        
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = currentHealth;
+        }
+
+        SetHealthBarVisibility(false);
+    }
+    
+    public void SetHealthBarVisibility(bool isVisible)
+    {
+        if (uiCanvasObject != null)
+        {
+            uiCanvasObject.SetActive(isVisible);
+        }
     }
 
     // This is the exact function your Hitbox script is trying to call
@@ -23,14 +44,13 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         if (IsBlocking)
         {
-            Debug.Log($"{gameObject.name} BLOCKED the attack!");
-
             return false;
         }
 
         currentHealth -= damage;
-        Debug.Log($"<color=red>HIT!</color> {gameObject.name} Health: {currentHealth}");
 
+	if (healthSlider != null) healthSlider.value = currentHealth;
+	
         if (animator != null)
         {
             animator.SetTrigger("Hit");

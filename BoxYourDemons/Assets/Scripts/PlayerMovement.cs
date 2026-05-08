@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Animator animator;
-    [SerializeField] private Rigidbody rb; // Replaced CharacterController with Rigidbody
+    [SerializeField] private Rigidbody rb; 
 
     [Header("Cinemachine Cameras")]
     [SerializeField] private CinemachineVirtualCamera lockOnCam;
@@ -28,20 +28,19 @@ public class PlayerMovement : MonoBehaviour
     private bool isLockedOn;
     public bool IsLockedOn => isLockedOn;
     
+    private EnemyHealth currentTargetHealth;
+    
     public bool IsStunned { get; set; } = false;
 
     private void Start()
     {
-        // 1. Grab inputs from your centralized handler
         inputs = GetComponent<PlayerInputHandler>().Inputs;
         
-        // 2. Subscribe to the Lock-On button
         inputs.Combat.LockOn.performed += OnLockOn;
     }
 
     private void OnDestroy()
     {
-        // 3. Clean up the subscription when the script is destroyed
         if (inputs != null)
         {
             inputs.Combat.LockOn.performed -= OnLockOn;
@@ -70,14 +69,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (currentTarget != null)
             {
-                // Locked-on: Move relative to the character's facing direction (Strafing)
                 Vector3 strafeDirection = (transform.right * moveInput.x) + (transform.forward * moveInput.y);
                 Vector3 newPosition = rb.position + (strafeDirection.normalized * moveSpeed * Time.fixedDeltaTime);
                 rb.MovePosition(newPosition);
             }
             else
             {
-                // Free Roam: Move relative to the camera
                 Vector3 moveDirection = GetCameraRelativeDirection();
                 Vector3 newPosition = rb.position + (moveDirection.normalized * moveSpeed * Time.fixedDeltaTime);
                 rb.MovePosition(newPosition);
@@ -85,9 +82,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // ------------------------
-    // INPUT
-    // ------------------------
     private void ReadInput()
     {
         moveInput = inputs.Movement.Run.ReadValue<Vector2>();
@@ -107,9 +101,6 @@ public class PlayerMovement : MonoBehaviour
         return forward * moveInput.y + right * moveInput.x;
     }
 
-    // ------------------------
-    // ROTATION
-    // ------------------------
     private void HandleRotation()
     {
         if (isLockedOn && currentTarget != null)
@@ -141,9 +132,6 @@ public class PlayerMovement : MonoBehaviour
         );
     }
 
-    // ------------------------
-    // ANIMATION
-    // ------------------------
     private void UpdateAnimator()
     {
         if (isLockedOn)
@@ -159,14 +147,10 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsLockedOn", isLockedOn);
     }
 
-    // ------------------------
-    // LOCK-ON SYSTEM
-    // ------------------------
     private void OnLockOn(InputAction.CallbackContext ctx)
     {
-        Debug.Log("OnLockOn: " + isLockedOn);
         // if (!ctx.started) return;
-        Debug.Log("here");
+
         if (isLockedOn)
         {
             ClearTarget();
@@ -187,29 +171,49 @@ public class PlayerMovement : MonoBehaviour
 
         if (hits.Length == 0)
         {
-            Debug.Log("No enemies in range.");
             return;
-        } else 
-        {
-            // PUTTING THIS BACK!
-            Debug.Log("Found an enemy!"); 
         }
 
         float closestDistance = Mathf.Infinity;
         Transform bestTarget = null;
+        EnemyHealth bestTargetHealth = null;
 
         foreach (var hit in hits)
         {
-            float dist = Vector3.Distance(transform.position, hit.transform.position);
-            if (dist < closestDistance)
+            EnemyHealth healthScript = hit.GetComponentInParent<EnemyHealth>();
+            
+            if (healthScript != null)
             {
-                closestDistance = dist;
-                bestTarget = hit.transform;
+                float dist = Vector3.Distance(transform.position, hit.transform.position);
+                if (dist < closestDistance)
+                {
+                    closestDistance = dist;
+                    // Lock onto the ROOT object, not the child collider
+                    bestTarget = healthScript.transform; 
+                    bestTargetHealth = healthScript;
+                }
             }
+        }
+        
+        if (bestTarget == null) return;
+
+	if (currentTargetHealth != null)
+        {
+            currentTargetHealth.SetHealthBarVisibility(false);
         }
 
         currentTarget = bestTarget;
+        currentTargetHealth = bestTargetHealth;
         isLockedOn = true;
+        
+        currentTargetHealth = currentTarget.GetComponent<EnemyHealth>();
+        Debug.Log(currentTargetHealth);
+        
+        if (currentTargetHealth != null)
+        {
+            currentTargetHealth.SetHealthBarVisibility(true);
+            Debug.Log("Enable health bar");
+        }
 
         if (lockOnCam != null) lockOnCam.Priority = 11; 
         
@@ -221,6 +225,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void ClearTarget()
     {
+	if (currentTargetHealth != null)
+        {
+            currentTargetHealth.SetHealthBarVisibility(false);
+            Debug.Log("Disable health bar");
+        }
+        
+        currentTargetHealth = null;
         currentTarget = null;
         isLockedOn = false;
 
