@@ -26,6 +26,8 @@ public class PlayerCombat : MonoBehaviour
     private Animator animator;
     private PlayerInputs inputs;
     private PlayerMovement playerMovement;
+    
+    public bool IsStunned { get; set; } = false;
 
     private void Start()
     {
@@ -36,8 +38,8 @@ public class PlayerCombat : MonoBehaviour
         // Punches
         inputs.Combat.Jab.performed += context => HandleLeftClick();
         inputs.Combat.Cross.performed += context => HandleRightClick();
-        inputs.Combat.LeftHook.performed += context => animator.SetTrigger(Constants.Animations.TriggerLeftHook);
-        inputs.Combat.RightHook.performed += context => animator.SetTrigger(Constants.Animations.TriggerRightHook);
+        inputs.Combat.LeftHook.performed += context => HandleLeftHookClick(); 
+        inputs.Combat.RightHook.performed += context => HandleRightHookClick();
         // Pivots
         inputs.Movement.Run.performed += OnMovementInput;
     }
@@ -49,6 +51,19 @@ public class PlayerCombat : MonoBehaviour
         {
             inputs.Movement.Run.performed -= OnMovementInput;
         }
+    }
+    
+    private void HandleLeftHookClick() {
+    	if (IsStunned) return;
+    	
+    	animator.SetTrigger(Constants.Animations.TriggerLeftHook);
+    }
+    
+
+    private void HandleRightHookClick() {
+    	if (IsStunned) return;
+    	
+    	animator.SetTrigger(Constants.Animations.TriggerRightHook);
     }
 
     // private void OnEnable() => inputs.Enable();
@@ -86,6 +101,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnMovementInput(InputAction.CallbackContext ctx)
     {
+    	if (IsStunned) return;
         // 1. Read the WASD input
         Vector2 moveDir = ctx.ReadValue<Vector2>();
         
@@ -112,6 +128,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void HandleLeftClick()
     {
+    	if (IsStunned) return;
         // Check our universal Modifier stance
         bool isDefending = inputs.Combat.ModifierKey.IsPressed(); 
 
@@ -125,8 +142,9 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-        private void HandleRightClick()
+    private void HandleRightClick()
     {
+    	if (IsStunned) return;
         // Check our universal Modifier stance
         bool isDefending = inputs.Combat.ModifierKey.IsPressed(); 
 

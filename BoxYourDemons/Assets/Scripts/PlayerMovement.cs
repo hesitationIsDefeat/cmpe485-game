@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     private Transform currentTarget;
     private bool isLockedOn;
     public bool IsLockedOn => isLockedOn;
+    
+    public bool IsStunned { get; set; } = false;
 
     private void Start()
     {
@@ -54,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+    	if (IsStunned) return;
+    
         HandleMovement();
         HandleRotation();
     }
