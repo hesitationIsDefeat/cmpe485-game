@@ -40,7 +40,6 @@ public class Hitbox : MonoBehaviour
             {
                 DamageResult hitResult = damageableTarget.TakeDamage(damageAmount);
 
-                // ONLY stagger if they actively blocked it!
                 if (hitResult == DamageResult.Blocked)
                 {
                     if (ownerAnimator != null)
