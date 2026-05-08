@@ -49,13 +49,14 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         ReadInput();
-        HandleRotation(); // Movement is handled by Root Motion, so we only handle Rotation now!
+        
         UpdateAnimator();
     }
 
     private void FixedUpdate()
     {
         HandleMovement();
+        HandleRotation();
     }
 
     private void HandleMovement()
