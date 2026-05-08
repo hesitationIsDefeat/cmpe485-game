@@ -4,24 +4,53 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    public enum AIDifficulty { Easy, Medium, Hard }
+
+    [Header("AI Settings")]
+    public AIDifficulty currentDifficulty = AIDifficulty.Easy;
+    
     [Header("Targeting")]
     [SerializeField] private Transform player;
-    [SerializeField] private float chaseRadius = 5f;        // How close before they notice you
-    [SerializeField] private float stoppingDistance = 1.2f; // Punching range (stop moving)
+    [SerializeField] private float chaseRadius = 5f;        
+    [SerializeField] private float stoppingDistance = 1.2f; 
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float rotationSpeed = 5f;
 
+    [Header("Combat Settings")]
+    [SerializeField] private float easyAttackCooldown = 2.0f; // Seconds between easy punches
+    private float nextAttackTime = 0f;
+    
+    [Header("Hitboxes")]
+    [SerializeField] private Hitbox leftGlove;
+    [SerializeField] private Hitbox rightGlove;
+
+    // Array of trigger names that match your Animator exactly
+    private readonly string[] easyPunches = { "Jab", "Cross", "LHook", "RHook" };
+
     private Rigidbody rb;
     private Animator animator;
+    
+    public void EnableLeftGlove() => leftGlove.EnableHitbox();
+    public void EnableRightGlove() => rightGlove.EnableHitbox();
+
+    // Called exactly when the fist pulls back
+    public void DisableLeftGlove() => leftGlove.DisableHitbox();
+    public void DisableRightGlove() => rightGlove.DisableHitbox();
+    
+    // Safety net to turn both off
+    public void DisableAllHitboxes()
+    {
+        if (leftGlove != null) leftGlove.DisableHitbox();
+        if (rightGlove != null) rightGlove.DisableHitbox();
+    }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
-        // Auto-find the player if you forget to drag them into the Inspector
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -32,27 +61,27 @@ public class EnemyAI : MonoBehaviour
     {
         if (player == null) return;
 
-        // How far away is the player?
         float distanceToPlayer = Vector3.Distance(rb.position, player.position);
 
-        // If the player is inside the "aggro" radius, but not close enough to punch yet...
         if (distanceToPlayer <= chaseRadius && distanceToPlayer > stoppingDistance)
         {
             FacePlayer();
             MoveTowardsPlayer();
-            
-            // Tell the Animator to play the walking animation
             animator.SetBool("IsMoving", true);
         }
         else
         {
-            // Either the player ran away, or we are close enough to punch. Stop walking!
             animator.SetBool("IsMoving", false);
             
-            // If we are in punching range, keep staring at them even while stopped!
             if (distanceToPlayer <= stoppingDistance)
             {
                 FacePlayer();
+                
+                // NEW: We are in range. Is it time to punch?
+                if (Time.time >= nextAttackTime)
+                {
+                    ExecuteCombatLogic();
+                }
             }
         }
     }
@@ -60,12 +89,11 @@ public class EnemyAI : MonoBehaviour
     private void FacePlayer()
     {
         Vector3 direction = (player.position - rb.position).normalized;
-        direction.y = 0; // CRITICAL: Keeps the enemy from tilting up or down!
+        direction.y = 0; 
 
         if (direction != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            // Smoothly rotate the Rigidbody towards the player
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime));
         }
     }
@@ -73,19 +101,49 @@ public class EnemyAI : MonoBehaviour
     private void MoveTowardsPlayer()
     {
         Vector3 direction = (player.position - rb.position).normalized;
-        direction.y = 0; // Don't try to fly or dig underground!
+        direction.y = 0; 
         
-        // Physically push the Rigidbody forward
         Vector3 newPosition = rb.position + (direction * moveSpeed * Time.fixedDeltaTime);
         rb.MovePosition(newPosition);
     }
 
-    // BONUS: Draws visual circles in the Unity Editor so you can easily see your ranges!
+    // --- NEW COMBAT LOGIC ---
+
+    private void ExecuteCombatLogic()
+    {
+        switch (currentDifficulty)
+        {
+            case AIDifficulty.Easy:
+                PerformEasyAttack();
+                break;
+            case AIDifficulty.Medium:
+                // TODO: Implement Medium Logic
+                break;
+            case AIDifficulty.Hard:
+                // TODO: Implement Hard Logic
+                break;
+        }
+    }
+
+    private void PerformEasyAttack()
+    {
+        // 1. Pick a random punch from the array
+        int randomIndex = Random.Range(0, easyPunches.Length);
+        string selectedPunch = easyPunches[randomIndex];
+
+        // 2. Tell the Animator to fire it
+        Debug.Log($"<color=orange>Enemy AI:</color> Threw a {selectedPunch}!");
+        animator.SetTrigger(selectedPunch);
+
+        // 3. Reset the cooldown timer + add a tiny bit of random variation so it feels human
+        float randomDelay = Random.Range(-0.2f, 0.5f); 
+        nextAttackTime = Time.time + easyAttackCooldown + randomDelay;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, chaseRadius);
-        
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, stoppingDistance);
     }
