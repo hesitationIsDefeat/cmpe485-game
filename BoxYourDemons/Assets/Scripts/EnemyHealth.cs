@@ -14,12 +14,21 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField] private GameObject uiCanvasObject;
 
     private Animator animator;
+    private EnemyAI enemyAI; 
+    private Collider pushbox;
+    private Rigidbody rb;
     
     public bool IsBlocking { get; set; } = false;
+    
+    private bool isDead = false;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        enemyAI = GetComponent<EnemyAI>();
+        pushbox = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
+        
         currentHealth = maxHealth;
         
         if (healthSlider != null)
@@ -33,6 +42,12 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     
     public void SetHealthBarVisibility(bool isVisible)
     {
+    	if (isDead) 
+        {
+            if (uiCanvasObject != null) uiCanvasObject.SetActive(false);
+            return;
+        }
+        
         if (uiCanvasObject != null)
         {
             uiCanvasObject.SetActive(isVisible);
@@ -40,33 +55,51 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     }
 
     // This is the exact function your Hitbox script is trying to call
-    public bool TakeDamage(int damage)
+    public DamageResult TakeDamage(int damage)
     {
+    	if (isDead) return DamageResult.Ignored;
+    	
         if (IsBlocking)
         {
-            return false;
+            return DamageResult.Blocked;
         }
 
         currentHealth -= damage;
 
 	if (healthSlider != null) healthSlider.value = currentHealth;
 	
-        if (animator != null)
-        {
-            animator.SetTrigger("Hit");
-        }
-
         if (currentHealth <= 0)
         {
-            Debug.Log($"{gameObject.name} Knocked Out!");
+            Die();
+        }
+        else
+        {
+            if (animator != null) animator.SetTrigger("Hit");
         }
 
-        return true;
+        return DamageResult.Success;
     }
 
     private void Die()
     {
-        Debug.Log("Enemy Knocked Out!");
-        // animator.SetTrigger("Knockout");
+        isDead = true;
+        
+        if (rb != null) rb.isKinematic = true;
+
+        if (animator != null) animator.SetTrigger("Knockout");
+
+        SetHealthBarVisibility(false);
+
+        if (enemyAI != null) enemyAI.enabled = false;
+
+        if (pushbox != null) pushbox.enabled = false;
+
+        Transform hurtbox = transform.Find("EnemyHurtbox");
+        if (hurtbox != null)
+        {
+            hurtbox.gameObject.SetActive(false);
+        }
+
+        gameObject.layer = LayerMask.NameToLayer("Default");
     }
 }

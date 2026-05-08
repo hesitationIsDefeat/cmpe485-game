@@ -1,4 +1,11 @@
+public enum DamageResult
+{
+    Success, 
+    Blocked,
+    Ignored  
+}
+
 public interface IDamageable
 {
-    bool TakeDamage(int damage);
+    DamageResult TakeDamage(int damage);
 }

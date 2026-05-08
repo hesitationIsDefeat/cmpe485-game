@@ -38,11 +38,11 @@ public class Hitbox : MonoBehaviour
             
             if (damageableTarget != null)
             {
-                bool hitConnected = damageableTarget.TakeDamage(damageAmount);
+                DamageResult hitResult = damageableTarget.TakeDamage(damageAmount);
 
-                if (!hitConnected)
+                // ONLY stagger if they actively blocked it!
+                if (hitResult == DamageResult.Blocked)
                 {
-                    Debug.Log("My punch bounced off their guard!");
                     if (ownerAnimator != null)
                     {
                         ownerAnimator.SetTrigger("Recoil");

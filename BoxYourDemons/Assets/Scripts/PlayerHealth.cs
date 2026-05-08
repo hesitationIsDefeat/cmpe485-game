@@ -28,11 +28,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
     }
 
-    public bool TakeDamage(int damage)
+    public DamageResult TakeDamage(int damage)
     {
         if (IsBlocking)
         {
-            return false;
+            return DamageResult.Blocked;
         }
 
         currentHealth -= damage;
@@ -42,16 +42,18 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             healthSlider.value = currentHealth;
         }
 
-        if (animator != null)
-        {
-            animator.SetTrigger("Hit");
-        }
-
         if (currentHealth <= 0)
         {
-            Debug.Log($"{gameObject.name} Knocked Out!");
+            Die();
+        }
+        else
+        {
+            if (animator != null) animator.SetTrigger("Hit");
         }
 
-        return true;
+        return DamageResult.Success;
     }
+    
+    private void Die()
+    {}
 }
