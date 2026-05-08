@@ -1,0 +1,610 @@
+fileFormatVersion: 2
+guid: dbd53b1467a1d8ee1acbb22cfcb8bcbb
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialEnemy
+    second: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Idle Chill' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'mixamorig:Spine' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\nClip 'Idle
+      Angry' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Blocking Body With Arms.001' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms and has rotation
+      animation that will be discarded.\n\nClip 'Boxing Back Hand Hook' has import
+      animation warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Boxing Back Hand Uppercut' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms and has rotation
+      animation that will be discarded.\n\nClip 'Boxing Back Hand Uppercut.001' has
+      import animation warnings that might lower retargeting quality:\nNote: Activate
+      translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Boxing Lead Hand Hook' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Boxing Lead Hand Uppercut' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms and has rotation
+      animation that will be discarded.\n\nClip 'Idle Medium' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Jab Cross' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Knocked Out Falling To Back' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms and has rotation
+      animation that will be discarded.\n\nClip 'Lead Jab' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'mixamorig:Spine' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\nClip 'Left
+      Pivot' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Low Left Block' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Low Right Block' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Medium Left Side Step' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Medium Right Side Step' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Medium Step Forward' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Punching A Speedbag' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Receiving A Big Hit In The Side' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\nClip 'Receiving A Big
+      Hit To The Head' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Receiving A Hit By An Uppercut To The Body' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'mixamorig:Spine' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\nClip 'Receiving
+      An Uppercut' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Right Pivot' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Running Leaning Back Or Forth' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms and has rotation
+      animation that will be discarded.\n\nClip 'Step Backward' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Victory From A Boxing Win' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms and has rotation
+      animation that will be discarded.\n\nClip 'Walking With A Swagger' has import
+      animation warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Blocking Body With Arms' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms and has rotation
+      animation that will be discarded.\n\nClip 'Enemy|Boxing Back Hand Hook' has
+      import animation warnings that might lower retargeting quality:\nNote: Activate
+      translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Boxing Back Hand Uppercut' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\nClip 'Enemy|Boxing Lead
+      Hand Hook' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Boxing Lead Hand Uppercut' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\nClip 'Enemy|Idle Angry'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Idle Chill' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Idle Medium' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Jab Cross' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Knocked Out Falling To Back' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\nClip 'Enemy|Lead Jab'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Left Pivot' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Low Left Block' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Low Right Block' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Medium Left Side Step' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms and has rotation
+      animation that will be discarded.\n\nClip 'Enemy|Medium Right Side Step' has
+      import animation warnings that might lower retargeting quality:\nNote: Activate
+      translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Medium Step Forward' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms and has rotation
+      animation that will be discarded.\n\nClip 'Enemy|Punching A Speedbag' has import
+      animation warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Receiving A Big Hit In The Side' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'mixamorig:Spine' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\nClip 'Enemy|Receiving
+      A Big Hit To The Head' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Receiving A Hit By An Uppercut To The Body' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'mixamorig:Spine' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\nClip 'Enemy|Receiving
+      An Uppercut' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Right Pivot' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Running Leaning Back Or Forth' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\nClip 'Enemy|Step Backward'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Enemy|Victory From A Boxing Win' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'mixamorig:Spine' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\nClip 'Enemy|Walking With
+      A Swagger' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'mixamorig:Spine'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: mixamorig:Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:UpLeg.L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:UpLeg.R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:Leg.L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:Leg.R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:Foot.L
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:Foot.R
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:Spine1
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:Spine2
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:Shoulder.L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:Shoulder.R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:Arm.L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:Arm.R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:ForeArm.L
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:ForeArm.R
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Wrist.L
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Wrist.R
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:ToeBase.L
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: mixamorig:ToeBase.R
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Enemy2(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Enemy
+      parentName: Enemy2(Clone)
+      position: {x: 0.015492391, y: -0.14211044, z: 0.08319123}
+      rotation: {x: -0.044977903, y: 0.37839726, z: -0.008566947, w: 0.9245102}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Root
+      parentName: Enemy
+      position: {x: -0, y: 2.03565e-40, z: -2.696302e-33}
+      rotation: {x: -0.000000037252903, y: -0.000000029802322, z: -0.000000007450581, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mixamorig:Hips
+      parentName: Root
+      position: {x: -0.7953949, y: 115.67135, z: 1.222783}
+      rotation: {x: 0.05261307, y: -0.37830988, z: 0.011645335, w: 0.9241093}
+      scale: {x: 1.0000001, y: 0.9999999, z: 1}
+    - name: mixamorig:Spine
+      parentName: mixamorig:Hips
+      position: {x: -0.0009011999, y: 9.9235, z: -0.8834766}
+      rotation: {x: -0.028754398, y: 0.00000020624304, z: -0.0000059984086, w: 0.9995865}
+      scale: {x: 1.0000001, y: 0.9999999, z: 1.0000001}
+    - name: mixamorig:Spine1
+      parentName: mixamorig:Spine
+      position: {x: 0.00000007636845, y: 11.664745, z: -0.00000024028122}
+      rotation: {x: 0.031124072, y: 0.0000007559952, z: 0.000009807273, w: 0.99951553}
+      scale: {x: 1.0000001, y: 1.0000005, z: 1}
+    - name: mixamorig:Spine2
+      parentName: mixamorig:Spine1
+      position: {x: 0.00000013411045, y: 13.360308, z: -0.000003438443}
+      rotation: {x: -0.012007862, y: -0.0000018878321, z: -0.0000036478702, w: 0.99992794}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1.0000001}
+    - name: mixamorig:Neck
+      parentName: mixamorig:Spine2
+      position: {x: 0.0000010505319, y: 15.031621, z: 0.19126384}
+      rotation: {x: 0.009637257, y: -0.00000014726993, z: 0.000000010771004, w: 0.9999536}
+      scale: {x: 0.99999994, y: 1, z: 1.0000001}
+    - name: mixamorig:Head
+      parentName: mixamorig:Neck
+      position: {x: 0.0000039339066, y: 10.321816, z: 1.2483506}
+      rotation: {x: -0.000000014901159, y: 0.000000089407536, z: -0.000014597552, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 0.99999976}
+    - name: mixamorig:HeadTop_End
+      parentName: mixamorig:Head
+      position: {x: -0.00016188622, y: 13.540232, z: 3.5016499}
+      rotation: {x: 0.000000013037734, y: -0.0000000894085, z: 0.000023327764, w: 1}
+      scale: {x: 0.99999994, y: 0.9999999, z: 1}
+    - name: mixamorig:Shoulder.L
+      parentName: mixamorig:Spine2
+      position: {x: -6.106208, y: 13.7072, z: 3.2811348}
+      rotation: {x: 0.46954113, y: -0.53932446, z: 0.5274867, w: 0.45871347}
+      scale: {x: 1.0000005, y: 1.0000004, z: 1.0000004}
+    - name: mixamorig:Arm.L
+      parentName: mixamorig:Shoulder.L
+      position: {x: 0.0000032782555, y: 17.435287, z: 0.000008352101}
+      rotation: {x: -0.000070735805, y: 0.0017178652, z: -0.041143846, w: 0.9991518}
+      scale: {x: 0.9999997, y: 1.0000001, z: 1.0000002}
+    - name: mixamorig:ForeArm.L
+      parentName: mixamorig:Arm.L
+      position: {x: 0.0000023320317, y: 26.78824, z: -0.000011086464}
+      rotation: {x: -0.00000024596375, y: -0.000000079744495, z: -0.042230707, w: 0.99910796}
+      scale: {x: 1.0000011, y: 1.0000005, z: 1.0000004}
+    - name: Wrist.L
+      parentName: mixamorig:ForeArm.L
+      position: {x: 0.0000009536743, y: 34.855137, z: 0.000008106232}
+      rotation: {x: -0.00005286214, y: -0.006494439, z: -0.008127291, w: 0.9999459}
+      scale: {x: 0.9999999, y: 0.9999995, z: 0.9999997}
+    - name: mixamorig:Shoulder.R
+      parentName: mixamorig:Spine2
+      position: {x: 6.0994425, y: 13.708286, z: 3.2811754}
+      rotation: {x: -0.46949607, y: -0.5393636, z: 0.5274453, w: -0.45876116}
+      scale: {x: 1.0000002, y: 1.0000005, z: 1.0000001}
+    - name: mixamorig:Arm.R
+      parentName: mixamorig:Shoulder.R
+      position: {x: 0.00000047683716, y: 17.435286, z: 0.0000038146973}
+      rotation: {x: -0.00007100403, y: -0.0017178655, z: 0.041143984, w: 0.99915177}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000005}
+    - name: mixamorig:ForeArm.R
+      parentName: mixamorig:Arm.R
+      position: {x: 0.000005722046, y: 26.788254, z: 0.000012397766}
+      rotation: {x: -0.00000014757825, y: 0.00000030337833, z: 0.04223065, w: 0.9991079}
+      scale: {x: 1.0000005, y: 0.9999998, z: 1.0000002}
+    - name: Wrist.R
+      parentName: mixamorig:ForeArm.R
+      position: {x: -0.000002220273, y: 34.855125, z: -0.000002861023}
+      rotation: {x: -0.000052707845, y: 0.006494336, z: 0.008127262, w: 0.9999459}
+      scale: {x: 1.0000001, y: 0.9999997, z: 0.99999976}
+    - name: mixamorig:UpLeg.L
+      parentName: mixamorig:Hips
+      position: {x: -13.391764, y: -4.9436812, z: -0.000046746074}
+      rotation: {x: -0.018602235, y: 0.013152675, z: 0.9993104, w: 0.029320925}
+      scale: {x: 1.0000045, y: 1.0000005, z: 1.0000001}
+    - name: mixamorig:Leg.L
+      parentName: mixamorig:UpLeg.L
+      position: {x: -0.00000333786, y: 40.60901, z: -0.000004053116}
+      rotation: {x: -0.037310243, y: -0.019340865, z: 0.0052267225, w: 0.9991029}
+      scale: {x: 1.0000001, y: 1.0000005, z: 1.0000006}
+    - name: mixamorig:Foot.L
+      parentName: mixamorig:Leg.L
+      position: {x: -0.0000021904707, y: 42.099625, z: -0.0000015497208}
+      rotation: {x: 0.3385135, y: 0.0061528385, z: -0.007759355, w: 0.94090945}
+      scale: {x: 1.0000004, y: 1.000001, z: 1.0000002}
+    - name: mixamorig:ToeBase.L
+      parentName: mixamorig:Foot.L
+      position: {x: 0.00000052154064, y: 13.43237, z: -0.000000059604645}
+      rotation: {x: 0.43944496, y: 0.027913162, z: 0.030379957, w: 0.89732164}
+      scale: {x: 1.0000005, y: 1.0000004, z: 1}
+    - name: mixamorig:Toe_End.L
+      parentName: mixamorig:ToeBase.L
+      position: {x: 0.00000090897083, y: 9.999995, z: -0.0000012516975}
+      rotation: {x: 0.00000020861626, y: -0.000000074505806, z: -0.00000004656613, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: mixamorig:UpLeg.R
+      parentName: mixamorig:Hips
+      position: {x: 13.392626, y: -4.941344, z: 0.000046749086}
+      rotation: {x: 0.018597638, y: 0.013154534, z: 0.9993079, w: -0.029408077}
+      scale: {x: 1.0000036, y: 1.0000015, z: 1.0000004}
+    - name: mixamorig:Leg.R
+      parentName: mixamorig:UpLeg.R
+      position: {x: 0.000003963709, y: 40.609016, z: -0.0000027120113}
+      rotation: {x: -0.037310217, y: 0.019340929, z: -0.005226734, w: 0.9991029}
+      scale: {x: 0.9999996, y: 0.99999917, z: 0.99999994}
+    - name: mixamorig:Foot.R
+      parentName: mixamorig:Leg.R
+      position: {x: -0.00000047683716, y: 42.099617, z: 0}
+      rotation: {x: 0.3385134, y: -0.0061529474, z: 0.0077594207, w: 0.9409095}
+      scale: {x: 0.9999998, y: 1.0000004, z: 1.0000007}
+    - name: mixamorig:ToeBase.R
+      parentName: mixamorig:Foot.R
+      position: {x: 0.000008583069, y: 13.432376, z: -0.0000009536743}
+      rotation: {x: 0.4394449, y: -0.027913226, z: -0.030379962, w: 0.89732164}
+      scale: {x: 0.9999998, y: 1, z: 0.99999976}
+    - name: mixamorig:Toe_End.R
+      parentName: mixamorig:ToeBase.R
+      position: {x: -0.00000047683716, y: 9.999995, z: -0.0000009536743}
+      rotation: {x: 0.00000020861626, y: 0.00000016950071, z: 0.000000054948032, w: 1}
+      scale: {x: 1, y: 0.9999998, z: 1.0000001}
+    - name: Enemy.001
+      parentName: Enemy2(Clone)
+      position: {x: 0.015492392, y: -0.14211044, z: 0.083191246}
+      rotation: {x: -0.6855317, y: 0.273625, z: 0.26150954, w: 0.6219232}
+      scale: {x: 0.9999998, y: 0.9999998, z: 0.9999998}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

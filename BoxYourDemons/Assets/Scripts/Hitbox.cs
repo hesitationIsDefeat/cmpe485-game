@@ -19,13 +19,11 @@ public class Hitbox : MonoBehaviour
 
     public void EnableHitbox()
     {
-    	Debug.Log("Enabled hitbox");
         hitboxCollider.enabled = true;
     }
 
     public void DisableHitbox()
     {
-    	Debug.Log("Disabled hitbox");
         hitboxCollider.enabled = false;
     }
 
@@ -37,7 +35,7 @@ public class Hitbox : MonoBehaviour
             Debug.Log($"BAM! {gameObject.name} hit {other.name} for {damageAmount} damage!");
             
             // TODO: Call your Enemy's TakeDamage script here
-            // other.GetComponent<EnemyHealth>().TakeDamage(damageAmount);
+            other.GetComponent<EnemyHealth>().TakeDamage(damageAmount);
 
             // Immediately turn the hitbox off so it doesn't hit twice in a single punch
             DisableHitbox(); 
