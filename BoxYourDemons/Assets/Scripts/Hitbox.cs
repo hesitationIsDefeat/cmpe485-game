@@ -29,15 +29,17 @@ public class Hitbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Bitwise check to see if the object we hit is on the Enemy layer
         if ((enemyLayer.value & (1 << other.gameObject.layer)) > 0)
         {
             Debug.Log($"BAM! {gameObject.name} hit {other.name} for {damageAmount} damage!");
             
-            // TODO: Call your Enemy's TakeDamage script here
-            other.GetComponent<EnemyHealth>().TakeDamage(damageAmount);
+            IDamageable healthScript = other.GetComponentInParent<IDamageable>();
+            
+            if (healthScript != null)
+            {
+                healthScript.TakeDamage(damageAmount);
+            }
 
-            // Immediately turn the hitbox off so it doesn't hit twice in a single punch
             DisableHitbox(); 
         }
     }
