@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isLockedOn;
     public bool IsLockedOn => isLockedOn;
     
+    public bool InputEnabled { get; set; } = false;
+    
     private EnemyHealth currentTargetHealth;
     
     public bool IsStunned { get; set; } = false;
@@ -49,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+    	if (!InputEnabled) return;
+
         ReadInput();
         
         if (isLockedOn && currentTargetHealth != null)
@@ -72,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (inputs.Combat.ModifierKey.IsPressed() && isLockedOn) return;
+        if ((inputs.Combat.ModifierKey.IsPressed() && isLockedOn) || !InputEnabled) return;
 
         if (!isLockedOn && moveInput.sqrMagnitude > 0.01f)
         {

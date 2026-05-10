@@ -50,21 +50,21 @@ public class PlayerCombat : MonoBehaviour
     }
     
     private void HandleLeftHookClick() {
-    	if (IsStunned) return;
+    	if (IsStunned || !playerMovement.InputEnabled) return;
     	
     	animator.SetTrigger(Constants.Animations.TriggerLeftHook);
     }
     
 
     private void HandleRightHookClick() {
-    	if (IsStunned) return;
+    	if (IsStunned || !playerMovement.InputEnabled) return;
     	
     	animator.SetTrigger(Constants.Animations.TriggerRightHook);
     }
 
     private void OnMovementInput(InputAction.CallbackContext ctx)
     {
-    	if (IsStunned) return;
+    	if (IsStunned || !playerMovement.InputEnabled) return;
 
         Vector2 moveDir = ctx.ReadValue<Vector2>();
         
@@ -85,7 +85,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void HandleLeftClick()
     {
-    	if (IsStunned) return;
+    	if (IsStunned || !playerMovement.InputEnabled) return;
 
         bool isDefending = inputs.Combat.ModifierKey.IsPressed(); 
 
@@ -101,7 +101,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void HandleRightClick()
     {
-    	if (IsStunned) return;
+    	if (IsStunned || !playerMovement.InputEnabled) return;
 
         bool isDefending = inputs.Combat.ModifierKey.IsPressed(); 
 

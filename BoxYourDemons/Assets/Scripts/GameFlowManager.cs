@@ -24,6 +24,7 @@ public class GameFlowManager : MonoBehaviour
     public Animator playerAnimator;
     public Transform enemySpawnPoint;
     public Transform playerStartLocation;
+    public PlayerMovement playerMovement;
 
     private int currentLevelIndex = 0;
     private GameObject currentActiveEnemy;
@@ -31,6 +32,8 @@ public class GameFlowManager : MonoBehaviour
     private void Start()
     {
         playerHealth.OnDeath += HandlePlayerDeath;
+        
+        if (playerMovement != null) playerMovement.InputEnabled = false;
         
         ShowPanel(mainMenuPanel);
     }
@@ -69,6 +72,11 @@ public class GameFlowManager : MonoBehaviour
         playerHealth.transform.position = playerStartLocation.position;
         playerHealth.Respawn();
 
+	if (playerMovement != null) playerMovement.InputEnabled = true;
+        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+	
         SpawnNextEnemy();
     }
 
@@ -106,6 +114,10 @@ public class GameFlowManager : MonoBehaviour
 
     private void HandleVictory()
     {
+    	if (playerMovement != null) 
+        {
+            playerMovement.InputEnabled = false;
+        }
         if (playerAnimator != null) playerAnimator.SetTrigger("Win");
         Invoke(nameof(ShowVictoryScreen), 3f);
     }
@@ -122,5 +134,12 @@ public class GameFlowManager : MonoBehaviour
         victoryPanel.SetActive(false);
         
         panelToShow.SetActive(true);
+        
+        if (panelToShow != hudPanel)
+        {
+            if (playerMovement != null) playerMovement.InputEnabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }

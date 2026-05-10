@@ -587,6 +587,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 1593078054}
   enemySpawnPoint: {fileID: 74906285}
   playerStartLocation: {fileID: 1593078055}
+  playerMovement: {fileID: 1593078057}
 --- !u!1 &136885325
 GameObject:
   m_ObjectHideFlags: 3
