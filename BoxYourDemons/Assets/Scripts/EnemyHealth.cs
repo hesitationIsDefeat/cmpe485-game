@@ -94,6 +94,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 	
 	if (charAudio != null) charAudio.PlayHitSound();
 	
+	if (enemyAI != null) enemyAI.ResetAttackCooldown();
+	
         if (currentHealth <= 0)
         {
             Die();
@@ -110,6 +112,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         if (isDead || IsMajorStunned) return;
 
+	if (enemyAI != null) enemyAI.ResetAttackCooldown();
+	
         currentBlocksLeft--;
         
         if (currentBlocksLeft >= 0)

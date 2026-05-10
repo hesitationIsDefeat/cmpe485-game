@@ -19,7 +19,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float rotationSpeed = 5f;
 
     [Header("Combat Settings")]
-    [SerializeField] private float easyAttackCooldown = 2.0f; // Seconds between easy punches
+    [SerializeField] private float attackCooldown = 2.0f;
     private float nextAttackTime = 0f;
     
     [Header("Hitboxes")]
@@ -122,7 +122,10 @@ public class EnemyAI : MonoBehaviour
         rb.MovePosition(newPosition);
     }
 
-    // --- NEW COMBAT LOGIC ---
+    public void ResetAttackCooldown()
+    {
+        nextAttackTime = Time.time + attackCooldown; 
+    }
 
     private void ExecuteCombatLogic()
     {
@@ -152,7 +155,7 @@ public class EnemyAI : MonoBehaviour
 
         // 3. Reset the cooldown timer + add a tiny bit of random variation so it feels human
         float randomDelay = Random.Range(-0.2f, 0.5f); 
-        nextAttackTime = Time.time + easyAttackCooldown + randomDelay;
+        nextAttackTime = Time.time + attackCooldown + randomDelay;
     }
 
     private void OnDrawGizmosSelected()
