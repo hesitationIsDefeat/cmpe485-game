@@ -59,8 +59,13 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // If we are flinching or mid-punch, stop moving/tracking!
-        // if (IsStunned) return; 
+        EnemyHealth myHealth = GetComponent<EnemyHealth>();
+
+        if ((myHealth != null && myHealth.IsMajorStunned)) 
+        {
+            rb.velocity = Vector3.zero; 
+            return; 
+        }
 
         if (player == null) return;
 
@@ -78,17 +83,13 @@ public class EnemyAI : MonoBehaviour
             
             if (distanceToPlayer <= stoppingDistance)
             {
-                // 1. Always keep turning to face the player
                 FacePlayer();
                 
-                // 2. Calculate exactly where the player is relative to where we are looking
                 Vector3 directionToPlayer = (player.position - rb.position).normalized;
                 directionToPlayer.y = 0; 
                 
-                // 3. Get the angle between our chest (transform.forward) and the player
                 float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
 
-                // 4. THE FIX: Only allow punches if they are perfectly in front of us! (Within 20 degrees)
                 if (angleToPlayer <= 20f)
                 {
                     if (Time.time >= nextAttackTime)

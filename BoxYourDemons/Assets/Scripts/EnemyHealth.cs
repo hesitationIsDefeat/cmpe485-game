@@ -12,6 +12,18 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [Header("UI")]
     [SerializeField] private Slider healthSlider;
     [SerializeField] private GameObject uiCanvasObject;
+    
+    [Header("Posture System")]
+    [SerializeField] private int blocksToStun = 3;
+    [SerializeField] private float stunDuration = 3f;
+    
+    [Header("Posture UI")]
+    [SerializeField] private Transform postureBarContainer; 
+    [SerializeField] private GameObject blockPipPrefab;     
+    [SerializeField] private Image stunTimerCircle;      
+    
+    private int currentBlocksLeft;
+    public bool IsMajorStunned { get; private set; } = false;
 
     private Animator animator;
     private EnemyAI enemyAI; 
@@ -37,6 +49,15 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             healthSlider.value = currentHealth;
         }
 
+	currentBlocksLeft = blocksToStun;
+        stunTimerCircle.gameObject.SetActive(false);
+        postureBarContainer.gameObject.SetActive(true);
+
+        for (int i = 0; i < blocksToStun; i++)
+        {
+            Instantiate(blockPipPrefab, postureBarContainer);
+        }
+        
         SetHealthBarVisibility(false);
     }
     
@@ -78,6 +99,57 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
 
         return DamageResult.Success;
+    }
+    
+    public void OnAttackBlocked()
+    {
+        if (isDead || IsMajorStunned) return;
+
+        currentBlocksLeft--;
+        
+        if (currentBlocksLeft >= 0)
+        {
+            postureBarContainer.GetChild(currentBlocksLeft).gameObject.SetActive(false);
+        }
+
+        if (currentBlocksLeft <= 0)
+        {
+            StartCoroutine(MajorStunRoutine());
+        }
+        else
+        {
+            if (animator != null) animator.SetTrigger("Recoil");
+        }
+    }
+
+    private System.Collections.IEnumerator MajorStunRoutine()
+    {
+        IsMajorStunned = true;
+        Debug.Log("<color=yellow>POSTURE BROKEN! MAJOR STUN!</color>");
+
+        if (animator != null) animator.SetTrigger("Hit"); 
+
+        postureBarContainer.gameObject.SetActive(false);
+        stunTimerCircle.gameObject.SetActive(true);
+        stunTimerCircle.fillAmount = 1f;
+
+        float timer = stunDuration;
+        while (timer > 0)
+        {
+            if (isDead) yield break; 
+            
+            timer -= Time.deltaTime;
+            stunTimerCircle.fillAmount = timer / stunDuration;
+            yield return null; 
+        }
+
+        currentBlocksLeft = blocksToStun;
+        foreach (Transform pip in postureBarContainer) pip.gameObject.SetActive(true); 
+        
+        stunTimerCircle.gameObject.SetActive(false);
+        postureBarContainer.gameObject.SetActive(true);
+        
+        IsMajorStunned = false;
     }
 
     private void Die()

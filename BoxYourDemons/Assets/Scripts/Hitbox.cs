@@ -42,9 +42,14 @@ public class Hitbox : MonoBehaviour
 
                 if (hitResult == DamageResult.Blocked)
                 {
-                    if (ownerAnimator != null)
+                    EnemyHealth enemyOwner = GetComponentInParent<EnemyHealth>();
+                    if (enemyOwner != null)
                     {
-                        ownerAnimator.SetTrigger("Recoil");
+                        enemyOwner.OnAttackBlocked();
+                    }
+                    else 
+                    {
+                        if (ownerAnimator != null) ownerAnimator.SetTrigger("Recoil");
                     }
                 }
             }
