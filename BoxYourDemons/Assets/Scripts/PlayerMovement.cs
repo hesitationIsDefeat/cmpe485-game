@@ -50,6 +50,15 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         ReadInput();
+        
+        if (isLockedOn && currentTargetHealth != null)
+        {
+            if (currentTargetHealth.IsDead)
+            {
+                ClearTarget();
+            }
+        }
+        
         UpdateAnimator();
     }
 
@@ -182,13 +191,12 @@ public class PlayerMovement : MonoBehaviour
         {
             EnemyHealth healthScript = hit.GetComponentInParent<EnemyHealth>();
             
-            if (healthScript != null)
+            if (healthScript != null && !healthScript.IsDead)
             {
                 float dist = Vector3.Distance(transform.position, hit.transform.position);
                 if (dist < closestDistance)
                 {
                     closestDistance = dist;
-                    // Lock onto the ROOT object, not the child collider
                     bestTarget = healthScript.transform; 
                     bestTargetHealth = healthScript;
                 }

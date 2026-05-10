@@ -33,7 +33,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     
     public bool IsBlocking { get; set; } = false;
     
-    private bool isDead = false;
+    public bool IsDead { get; private set; } = false;
 
     private void Awake()
     {
@@ -90,7 +90,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     
     public void SetHealthBarVisibility(bool isVisible)
     {
-    	if (isDead) 
+    	if (IsDead) 
         {
             if (uiCanvasObject != null) uiCanvasObject.SetActive(false);
             return;
@@ -105,7 +105,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     // This is the exact function your Hitbox script is trying to call
     public DamageResult TakeDamage(int damage)
     {
-    	if (isDead) return DamageResult.Ignored;
+    	if (IsDead) return DamageResult.Ignored;
     	
         if (IsBlocking)
         {
@@ -135,7 +135,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     
     public void OnAttackBlocked()
     {
-        if (isDead || IsMajorStunned) return;
+        if (IsDead || IsMajorStunned) return;
 
 	if (enemyAI != null) enemyAI.ResetAttackCooldown();
 	
@@ -170,7 +170,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         float timer = stunDuration;
         while (timer > 0)
         {
-            if (isDead) yield break; 
+            if (IsDead) yield break; 
             
             timer -= Time.deltaTime;
             stunTimerCircle.fillAmount = timer / stunDuration;
@@ -188,7 +188,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        isDead = true;
+        IsDead = true;
         
         if (rb != null) rb.isKinematic = true;
 
