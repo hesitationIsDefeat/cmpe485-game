@@ -13,6 +13,7 @@ public class EnemyFactory : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject baseEnemyPrefab;
+    [SerializeField] private Transform playerTransform;
 
     [Header("Spawn Settings (For Testing)")]
     [SerializeField] private Transform spawnPoint;
@@ -31,6 +32,11 @@ public class EnemyFactory : MonoBehaviour
         EnemyHealth health = newEnemy.GetComponent<EnemyHealth>();
         EnemyAI ai = newEnemy.GetComponent<EnemyAI>();
         CharacterStats stats = newEnemy.GetComponent<CharacterStats>();
+        
+        if (ai != null && playerTransform != null)
+        {
+            ai.SetTarget(playerTransform);
+        }
 
         switch (difficulty)
         {

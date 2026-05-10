@@ -50,10 +50,10 @@ public class EnemyAI : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
-        if (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-        }
+        //if (player == null)
+        //{
+        //    player = GameObject.FindGameObjectWithTag("Player").transform;
+        //}
     }
 
     private void FixedUpdate()
@@ -119,6 +119,11 @@ public class EnemyAI : MonoBehaviour
         
         Vector3 newPosition = rb.position + (direction * moveSpeed * Time.fixedDeltaTime);
         rb.MovePosition(newPosition);
+    }
+    
+    public void SetTarget(Transform targetPlayer)
+    {
+        player = targetPlayer;
     }
 
     public void ResetAttackCooldown()
