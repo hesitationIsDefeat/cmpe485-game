@@ -6,11 +6,11 @@ public class Hitbox : MonoBehaviour
 {
     [Header("Hitbox Settings")]
     [SerializeField] private LayerMask targetLayer;
-    [SerializeField] private int damageAmount = 10;
     
     private Collider hitboxCollider;
     
     private Animator ownerAnimator;
+    private CharacterStats myStats;
 
     private void Awake()
     {
@@ -18,6 +18,7 @@ public class Hitbox : MonoBehaviour
         hitboxCollider.enabled = false; 
         
         ownerAnimator = GetComponentInParent<Animator>();
+        myStats = GetComponentInParent<CharacterStats>();
     }
 
     public void EnableHitbox()
@@ -38,7 +39,8 @@ public class Hitbox : MonoBehaviour
             
             if (damageableTarget != null)
             {
-                DamageResult hitResult = damageableTarget.TakeDamage(damageAmount);
+            	int damage = myStats != null ? myStats.attackDamage : 10;
+                DamageResult hitResult = damageableTarget.TakeDamage(damage);
 
                 if (hitResult == DamageResult.Blocked)
                 {

@@ -19,14 +19,13 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float rotationSpeed = 5f;
 
     [Header("Combat Settings")]
-    [SerializeField] private float attackCooldown = 2.0f;
+    [SerializeField] public float attackCooldown = 2.0f;
     private float nextAttackTime = 0f;
     
     [Header("Hitboxes")]
     [SerializeField] private Hitbox leftGlove;
     [SerializeField] private Hitbox rightGlove;
 
-    // Array of trigger names that match your Animator exactly
     private readonly string[] easyPunches = { "Jab", "Cross", "LHook", "RHook" };
 
     private Rigidbody rb;

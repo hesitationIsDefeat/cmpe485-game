@@ -63,6 +63,31 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         SetHealthBarVisibility(false);
     }
     
+    public void InitializeStats(int newHealth, int blocks, float stunTime)
+    {
+        maxHealth = newHealth;
+        currentHealth = maxHealth;
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = currentHealth;
+        }
+
+        blocksToStun = blocks;
+        currentBlocksLeft = blocksToStun;
+        stunDuration = stunTime;
+
+        foreach (Transform child in postureBarContainer)
+        {
+            Destroy(child.gameObject);
+        }
+        
+        for (int i = 0; i < blocksToStun; i++)
+        {
+            Instantiate(blockPipPrefab, postureBarContainer);
+        }
+    }
+    
     public void SetHealthBarVisibility(bool isVisible)
     {
     	if (isDead) 
