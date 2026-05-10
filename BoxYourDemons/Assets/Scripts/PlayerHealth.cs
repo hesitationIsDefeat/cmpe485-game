@@ -13,12 +13,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField] private Slider healthSlider;
 
     private Animator animator;
+    private CharacterAudio charAudio;
     
     public bool IsBlocking { get; set; } = false;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        charAudio = GetComponent<CharacterAudio>();
         currentHealth = maxHealth;
         
         if (healthSlider != null)
@@ -32,6 +34,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         if (IsBlocking)
         {
+            if (charAudio != null) charAudio.PlayBlockSound();
             return DamageResult.Blocked;
         }
 
@@ -41,6 +44,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         {
             healthSlider.value = currentHealth;
         }
+        
+        if (charAudio != null) charAudio.PlayHitSound();
 
         if (currentHealth <= 0)
         {

@@ -26,6 +26,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public bool IsMajorStunned { get; private set; } = false;
 
     private Animator animator;
+    private CharacterAudio charAudio;
     private EnemyAI enemyAI; 
     private Collider pushbox;
     private Rigidbody rb;
@@ -37,6 +38,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        charAudio = GetComponent<CharacterAudio>();
         enemyAI = GetComponent<EnemyAI>();
         pushbox = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
@@ -82,12 +84,15 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     	
         if (IsBlocking)
         {
+            if (charAudio != null) charAudio.PlayBlockSound();
             return DamageResult.Blocked;
         }
 
         currentHealth -= damage;
 
 	if (healthSlider != null) healthSlider.value = currentHealth;
+	
+	if (charAudio != null) charAudio.PlayHitSound();
 	
         if (currentHealth <= 0)
         {
