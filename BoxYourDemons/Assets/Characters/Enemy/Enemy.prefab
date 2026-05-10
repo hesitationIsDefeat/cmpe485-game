@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 8781620073266546796}
   - component: {fileID: 5148718557402622924}
   - component: {fileID: 5909671525816033899}
+  - component: {fileID: 3191343009932248088}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -643,6 +644,19 @@ MonoBehaviour:
   blockImpacts:
   - {fileID: 8300000, guid: 74198389e177d0948b63ca9a3fb22801, type: 3}
   - {fileID: 8300000, guid: e5ecc98ff40556543b77c8c2aa090822, type: 3}
+--- !u!114 &3191343009932248088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3785495872839294850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f75d5684afcf40fdca0ee4e1ec71323a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 10
 --- !u!1 &4925921217960264492
 GameObject:
   m_ObjectHideFlags: 0

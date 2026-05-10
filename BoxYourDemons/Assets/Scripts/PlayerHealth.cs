@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
@@ -16,6 +17,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private CharacterAudio charAudio;
     
     public bool IsBlocking { get; set; } = false;
+    
+      public bool IsDead { get; private set; } = false;
+    public event Action OnDeath;
 
     private void Awake()
     {
@@ -60,5 +64,18 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     }
     
     private void Die()
-    {}
+    {
+    	IsDead = true;
+    	
+    	OnDeath?.Invoke();
+    }
+    
+    public void Respawn()
+    {
+        IsDead = false;
+        currentHealth = maxHealth;
+        if (healthSlider != null) healthSlider.value = currentHealth;
+        animator.Rebind();
+        animator.Update(0f);
+    }
 }

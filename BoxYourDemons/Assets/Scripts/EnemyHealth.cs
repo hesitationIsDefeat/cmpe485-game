@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
@@ -34,6 +35,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public bool IsBlocking { get; set; } = false;
     
     public bool IsDead { get; private set; } = false;
+    public event Action OnDeath;
 
     private void Awake()
     {
@@ -205,5 +207,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
 
         gameObject.layer = LayerMask.NameToLayer("Default");
+        
+        OnDeath?.Invoke();
     }
 }
