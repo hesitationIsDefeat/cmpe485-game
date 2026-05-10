@@ -102,7 +102,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
 
-    // This is the exact function your Hitbox script is trying to call
     public DamageResult TakeDamage(int damage)
     {
     	if (IsDead) return DamageResult.Ignored;
@@ -159,7 +158,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private System.Collections.IEnumerator MajorStunRoutine()
     {
         IsMajorStunned = true;
-        Debug.Log("<color=yellow>POSTURE BROKEN! MAJOR STUN!</color>");
 
         if (animator != null) animator.SetTrigger("Hit"); 
 

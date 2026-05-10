@@ -158,8 +158,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnLockOn(InputAction.CallbackContext ctx)
     {
-        // if (!ctx.started) return;
-
         if (isLockedOn)
         {
             ClearTarget();
@@ -215,12 +213,10 @@ public class PlayerMovement : MonoBehaviour
         isLockedOn = true;
         
         currentTargetHealth = currentTarget.GetComponent<EnemyHealth>();
-        Debug.Log(currentTargetHealth);
         
         if (currentTargetHealth != null)
         {
             currentTargetHealth.SetHealthBarVisibility(true);
-            Debug.Log("Enable health bar");
         }
 
         if (lockOnCam != null) lockOnCam.Priority = 11; 
@@ -236,7 +232,6 @@ public class PlayerMovement : MonoBehaviour
 	if (currentTargetHealth != null)
         {
             currentTargetHealth.SetHealthBarVisibility(false);
-            Debug.Log("Disable health bar");
         }
         
         currentTargetHealth = null;

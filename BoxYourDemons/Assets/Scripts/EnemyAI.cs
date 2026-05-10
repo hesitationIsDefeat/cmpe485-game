@@ -34,11 +34,9 @@ public class EnemyAI : MonoBehaviour
     public void EnableLeftGlove() => leftGlove.EnableHitbox();
     public void EnableRightGlove() => rightGlove.EnableHitbox();
 
-    // Called exactly when the fist pulls back
     public void DisableLeftGlove() => leftGlove.DisableHitbox();
     public void DisableRightGlove() => rightGlove.DisableHitbox();
     
-    // Safety net to turn both off
     public void DisableAllHitboxes()
     {
         if (leftGlove != null) leftGlove.DisableHitbox();
@@ -124,6 +122,18 @@ public class EnemyAI : MonoBehaviour
     public void SetTarget(Transform targetPlayer)
     {
         player = targetPlayer;
+        
+        if (player != null)
+        {
+            Vector3 directionToPlayer = player.position - transform.position;
+            
+            directionToPlayer.y = 0; 
+            
+            if (directionToPlayer != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(directionToPlayer);
+            }
+        }
     }
 
     public void ResetAttackCooldown()
@@ -149,15 +159,11 @@ public class EnemyAI : MonoBehaviour
 
     private void PerformEasyAttack()
     {
-        // 1. Pick a random punch from the array
         int randomIndex = Random.Range(0, easyPunches.Length);
         string selectedPunch = easyPunches[randomIndex];
 
-        // 2. Tell the Animator to fire it
-        Debug.Log($"<color=orange>Enemy AI:</color> Threw a {selectedPunch}!");
         animator.SetTrigger(selectedPunch);
 
-        // 3. Reset the cooldown timer + add a tiny bit of random variation so it feels human
         float randomDelay = Random.Range(-0.2f, 0.5f); 
         nextAttackTime = Time.time + attackCooldown + randomDelay;
     }
