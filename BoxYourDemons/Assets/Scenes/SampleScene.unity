@@ -1839,6 +1839,8 @@ MonoBehaviour:
     keyName: Shift + D
   - actionName: Toggle Music
     keyName: M
+  - actionName: Toggle Pause
+    keyName: ESC
 --- !u!1 &441570866
 GameObject:
   m_ObjectHideFlags: 0
