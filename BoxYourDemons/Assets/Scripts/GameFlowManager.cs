@@ -9,6 +9,7 @@ public class GameFlowManager : MonoBehaviour
     [Header("UI Panels")]
     public GameObject mainMenuPanel;
     public GameObject levelSetupPanel;
+    public GameObject controlsPanel;
     public GameObject hudPanel;
     public GameObject gameOverPanel;
     public GameObject victoryPanel;
@@ -46,6 +47,11 @@ public class GameFlowManager : MonoBehaviour
         foreach (Transform child in levelListContainer) Destroy(child.gameObject);
         activeLevelDropdowns.Clear();
         Btn_AddLevel(); 
+    }
+    
+    public void Btn_ControlsClicked() 
+    {
+    	ShowPanel(controlsPanel);
     }
 
     public void Btn_AddLevel()
@@ -94,6 +100,11 @@ public class GameFlowManager : MonoBehaviour
             Destroy(currentActiveEnemy);
         }
         ShowPanel(mainMenuPanel);
+    }
+    
+    public void Btn_ExitGame()
+    {
+        Application.Quit();
     }
 
     private void SpawnNextEnemy()
@@ -144,6 +155,7 @@ public class GameFlowManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         levelSetupPanel.SetActive(false);
+        controlsPanel.SetActive(false);
         hudPanel.SetActive(false);
         gameOverPanel.SetActive(false);
         victoryPanel.SetActive(false);
