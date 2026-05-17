@@ -13,6 +13,7 @@ public class GameFlowManager : MonoBehaviour
     public GameObject hudPanel;
     public GameObject gameOverPanel;
     public GameObject victoryPanel;
+    public GameObject pausePanel;
 
     [Header("Level Setup UI")]
     public Transform levelListContainer;
@@ -31,6 +32,7 @@ public class GameFlowManager : MonoBehaviour
 
     private int currentLevelIndex = 0;
 
+    private bool isPaused = false;
     private void Start()
     {
         playerHealth.OnDeath += HandlePlayerDeath;
@@ -38,6 +40,39 @@ public class GameFlowManager : MonoBehaviour
         if (playerMovement != null) playerMovement.InputEnabled = false;
         
         ShowPanel(mainMenuPanel);
+    }
+    
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if ((hudPanel != null && hudPanel.activeSelf) || isPaused)
+            {
+                TogglePause();
+            }
+        }
+    }
+    
+    public void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            Time.timeScale = 0f; 
+            pausePanel.SetActive(true);
+            
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Time.timeScale = 1f; 
+            pausePanel.SetActive(false);
+            
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     public void Btn_PlayClicked()
@@ -95,10 +130,17 @@ public class GameFlowManager : MonoBehaviour
 
     public void Btn_ReturnToMainMenu()
     {
+        Time.timeScale = 1f; 
+        isPaused = false;
+        
     	if (currentActiveEnemy != null)
         {
             Destroy(currentActiveEnemy);
+            currentActiveEnemy = null;
         }
+        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         ShowPanel(mainMenuPanel);
     }
     
@@ -159,6 +201,7 @@ public class GameFlowManager : MonoBehaviour
         hudPanel.SetActive(false);
         gameOverPanel.SetActive(false);
         victoryPanel.SetActive(false);
+        pausePanel.SetActive(false);
         
         panelToShow.SetActive(true);
         
