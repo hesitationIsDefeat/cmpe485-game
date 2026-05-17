@@ -25,9 +25,10 @@ public class GameFlowManager : MonoBehaviour
     public Transform enemySpawnPoint;
     public Transform playerStartLocation;
     public PlayerMovement playerMovement;
+    
+    private GameObject currentActiveEnemy;
 
     private int currentLevelIndex = 0;
-    private GameObject currentActiveEnemy;
 
     private void Start()
     {
@@ -82,7 +83,10 @@ public class GameFlowManager : MonoBehaviour
 
     public void Btn_ReturnToMainMenu()
     {
-        if (currentActiveEnemy != null) Destroy(currentActiveEnemy);
+    	if (currentActiveEnemy != null)
+        {
+            Destroy(currentActiveEnemy);
+        }
         ShowPanel(mainMenuPanel);
     }
 
@@ -103,7 +107,12 @@ public class GameFlowManager : MonoBehaviour
 
     private void HandleEnemyDeath()
     {
-        currentLevelIndex++;
+        if (currentActiveEnemy != null)
+        {
+            currentActiveEnemy.GetComponent<EnemyHealth>().OnDeath -= HandleEnemyDeath;
+        }
+
+        currentLevelIndex++; 
         Invoke(nameof(SpawnNextEnemy), 3f); 
     }
 

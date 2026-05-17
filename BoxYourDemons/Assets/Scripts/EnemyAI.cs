@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
     
     [Header("Targeting")]
     [SerializeField] private Transform player;
-    [SerializeField] private float chaseRadius = 5f;        
+    [SerializeField] private float chaseRadius = 15f;        
     [SerializeField] private float stoppingDistance = 1.2f; 
 
     [Header("Movement")]
@@ -47,11 +47,6 @@ public class EnemyAI : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
-        //if (player == null)
-        //{
-        //    player = GameObject.FindGameObjectWithTag("Player").transform;
-        //}
     }
 
     private void FixedUpdate()
