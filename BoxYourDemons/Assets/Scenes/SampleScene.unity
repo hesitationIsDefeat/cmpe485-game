@@ -615,7 +615,6 @@ MonoBehaviour:
   enemySpawnPoint: {fileID: 74906285}
   playerStartLocation: {fileID: 1593078055}
   playerMovement: {fileID: 1593078057}
-  enemyCountInput: {fileID: 0}
 --- !u!1 &136885325
 GameObject:
   m_ObjectHideFlags: 3

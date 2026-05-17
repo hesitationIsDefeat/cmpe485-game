@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
     
     [Header("Targeting")]
     [SerializeField] private Transform player;
-    [SerializeField] private float chaseRadius = 15f;        
+    [SerializeField] private float chaseRadius = 50f;        
     [SerializeField] private float stoppingDistance = 1.2f; 
 
     [Header("Movement")]

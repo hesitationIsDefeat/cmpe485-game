@@ -67,14 +67,20 @@ public class GameFlowManager : MonoBehaviour
 
     public void Btn_StartGame()
     {
-        ShowPanel(hudPanel);
+    	if (currentActiveEnemy != null)
+        {
+            Destroy(currentActiveEnemy);
+            currentActiveEnemy = null;
+        }
+        
         currentLevelIndex = 0;
         
-        playerHealth.transform.position = playerStartLocation.position;
+        //playerHealth.transform.position = playerStartLocation.position;
         playerHealth.Respawn();
 
 	if (playerMovement != null) playerMovement.InputEnabled = true;
         
+        ShowPanel(hudPanel);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 	

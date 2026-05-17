@@ -14,6 +14,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField] private Slider healthSlider;
 
     private Animator animator;
+    private Rigidbody rb;
+    private Collider col;
     private CharacterAudio charAudio;
     
     public bool IsBlocking { get; set; } = false;
@@ -24,6 +26,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
         charAudio = GetComponent<CharacterAudio>();
         currentHealth = maxHealth;
         
@@ -53,7 +57,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         if (currentHealth <= 0)
         {
-            Die();
+            if (!IsDead) Die();
         }
         else
         {
@@ -65,16 +69,22 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     private void Die()
     {
+    	if (rb != null) rb.isKinematic = true;
+    	if (col != null) col.enabled = false;
+    	if (animator != null && !IsDead) animator.SetTrigger("Knockout");
     	IsDead = true;
-    	
+    	gameObject.layer = LayerMask.NameToLayer("Default");
     	OnDeath?.Invoke();
     }
     
     public void Respawn()
     {
         IsDead = false;
+        gameObject.layer = LayerMask.NameToLayer("Player");
         currentHealth = maxHealth;
         if (healthSlider != null) healthSlider.value = currentHealth;
+        if (rb != null) rb.isKinematic = false;
+    	if (col != null) col.enabled = true;
         animator.Rebind();
         animator.Update(0f);
     }
